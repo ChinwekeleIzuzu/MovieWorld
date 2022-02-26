@@ -26,7 +26,12 @@
         <hr />
         <div>
             <ul>
-                <li><a href="{% url 'movieworld:about' %}">About</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'movieworld:logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'movieworld:sign_up' %}">Sign Up</a></li>
+                <li><a href="{% url 'movieworld:login' %}">Login</a></li>            
+                {% endif %}
                 <li><a href="{% url 'movieworld:index' %}">Index</a></li>
             </ul>
         </div>

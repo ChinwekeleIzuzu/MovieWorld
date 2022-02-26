@@ -1,4 +1,4 @@
 from django.contrib import admin
+from movieworld.models import UserProfile
 
-# Register your models here.
-#comment test
+admin.site.register(UserProfile)
