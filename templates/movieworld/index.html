@@ -1,0 +1,36 @@
+<!-- @Author Xinyao -->
+{% extends 'movieworld/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Index
+{% endblock %}
+
+{% block body_block %}
+	<h1></h1>
+		<div>
+			<strong>Welcome to Movie World!</strong><br />
+		</div>
+
+		<h2>Top 5 Movies</h2>
+		<div>
+			<!-- Will revise after the models and forms are built -->
+			{% if movies %}
+				<ul>
+					{% for movie in movies %}
+						<li>
+							
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no movie present.</strong>
+			{% endif %}
+		</div>
+
+		<h2>Movie of the Week</h2>
+		<div>
+			<!-- Will revise after the models and forms are built -->
+		</div>
+
+{% endblock %}
