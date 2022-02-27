@@ -7,7 +7,8 @@ from django.utils.text import slugify
 
 class User(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # Password field.
+    picture = models.ImageField(upload_to = 'profile_images', blank=True)
+
     def __str__(self):
         return self.user.username
 

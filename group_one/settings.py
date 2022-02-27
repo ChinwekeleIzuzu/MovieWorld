@@ -14,13 +14,16 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vnw1_a74^a9l4vzniw+5+r(n#88g#cc2(_-dw*#h$2=%@-m+wy'
+SECRET_KEY = '-b*65uk+y(2+jfd!*7dcdfo(ruc_ko(#vr%nh2&$y-m!87=wc('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -55,7 +58,11 @@ ROOT_URLCONF = 'group_one.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [os.path.join(BASE_DIR, 'group_one/templates')],
+=======
+        'DIRS': [TEMPLATE_DIR, ],
+>>>>>>> 1105d171ff48efc7321df5779515c7febf2fa465
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -114,8 +122,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Media files
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/movieworld/login/'

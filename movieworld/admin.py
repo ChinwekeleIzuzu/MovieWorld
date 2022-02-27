@@ -14,3 +14,5 @@ from movieworld.models import User, Movie, Review, Genre
 # admin.site.register(Review)
 # admin.site.register(User) 
 # admin.site.register(Genre)
+
+admin.site.register(User)

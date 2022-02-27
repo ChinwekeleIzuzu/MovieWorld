@@ -1,0 +1,18 @@
+<!-- @Author Xinyao -->
+{% extends 'movieworld/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	About MovieWorld
+{% endblock %}
+
+{% block body_block %}
+	<h1>About Movie World</h1>
+		<div>
+			here is the about page.<br />
+			<strong>This website is a movie-rating platform.</strong><br />
+		</div>
+		<div>	
+			<img src="{% static "images/logo.jpg" %}" alt="Movie World logo" /> 
+		</div>
+{% endblock %}

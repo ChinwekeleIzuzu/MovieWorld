@@ -18,9 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from movieworld import views
 
-
 urlpatterns = [
     path('', views.index, name='index'),
+    path('movieworld/', include('movieworld.urls')),
     path('admin/', admin.site.urls),
-    path('movieworld/', include('movieworld.urls'))
 ]
