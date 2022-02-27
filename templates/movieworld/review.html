@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+
+{% endblock %}
+
+{% block title %}Movies | {{ movie.title }}{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1> Title: {{movie.title}} </h1>
+    <h5> Author : {{ movie.genre }} </h5>
+    <h5> ISBN: {{ book.year }} </h5>
+    <h5> Year: {{ book.language }} </h5>
+    <!-- {% if goodreads_Result %}
+    <h5> Total Ratings on Goodreads: {{ goodreads_Result.books[0].ratings_count }} </h5>
+    <h5> Average rating on Goodreads: {{ goodreads_Result.books[0].average_rating }} </h5>
+    <h5>
+        <a href="https://www.goodreads.com/search?q={{book.title}}" target="_blank">Visit Goodreads page</a>
+    </h5>
+    {% endif %}<br> -->
+    
+                <!-- <form action="{{ url_for('book', isbn=book.isbn) }}" method="post"> -->
+    
+    
+    
+                    Your review:<br>
+                    <textarea name="comment" cols="100" rows="12" value="">{{ user_review.review }}</textarea><br>
+                    <select name="rating">
+                        <option value="1" {% if user_review.review_numb == 1 %}selected="selected"{% endif %}>1</option>
+                        <option value="2" {% if user_review.review_numb == 2 %}selected="selected"{% endif %}>2</option>
+                        <option value="3" {% if user_review.review_numb == 3 %}selected="selected"{% endif %}>3</option>
+                        <option value="4" {% if user_review.review_numb == 4 %}selected="selected"{% endif %}>4</option>
+                        <option value="5" {% if user_review.review_numb == 5 %}selected="selected"{% endif %}>5</option>
+                    </select>
+                    {% if user_review %}
+                    <input type="submit" name="update" value="Update"><input type="submit" name="remove" value="Remove">
+                    {% else %}
+                    <input type="submit" name="add" value="Submit">
+                    {% endif %}
+                </form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block body %}
+
+  <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ImdbID</th>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th>Language</th>
+                <th>Poster</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie in movie_data.Search %}
+            <tr>
+                <td>{{  movie.imdbID }}</td>
+                <td><a href="/movie/{{movie.Title}}" name="title">{{ movie.Title }}</a></td>
+                <td>{{ movie.Genre }}</td>
+                <td>{{ movie.Year }}</td>
+                <td>{{  movie.Language }}</td>
+                <td><img src="{{ movie.Poster }}"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <div>
+        <a href="{% url 'page' query page_no %}"></a>
+    </div>
+
+{% endblock %}

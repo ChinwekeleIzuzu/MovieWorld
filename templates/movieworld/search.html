@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block body %}
+
+<center><h1 style="color: white; font-weight:700" class="m-5"><mark>Search for a book:</mark></h1></center>
+<form action="/search" method="post">
+    <div>
+        <!-- <input autocomplete="off" autofocus class="form-control" name="title" placeholder= "Title of Movie" type="text"> -->
+        <textarea type = "submit" id="textarea" name="title" value="{{ request.GET.title}}"></textarea>
+        <label for="textarea">Search</label>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
