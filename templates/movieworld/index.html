@@ -26,8 +26,11 @@
 			{% else %}
 				<strong>There are no movie present.</strong>
 			{% endif %}
+		</div><br>
+		<div>
+			<a href="{% url 'movieworld:search' %}">Search Your Movie</a>
 		</div>
-
+		
 		<h2>Movie of the Week</h2>
 		<div>
 			<!-- Will revise after the models and forms are built -->

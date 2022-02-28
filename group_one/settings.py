@@ -58,11 +58,7 @@ ROOT_URLCONF = 'group_one.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-<<<<<<< HEAD
-        'DIRS': [os.path.join(BASE_DIR, 'group_one/templates')],
-=======
         'DIRS': [TEMPLATE_DIR, ],
->>>>>>> 1105d171ff48efc7321df5779515c7febf2fa465
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

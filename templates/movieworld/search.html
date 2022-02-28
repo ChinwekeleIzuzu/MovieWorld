@@ -1,17 +1,18 @@
-{% extends "base.html" %}
+{% extends 'movieworld/base.html' %}
+{% load staticfiles %}
 
-{% block title %}
+{% block title_block %}
     Search
 {% endblock %}
 
-{% block body %}
+{% block body_block %}
 
-<center><h1 style="color: white; font-weight:700" class="m-5"><mark>Search for a book:</mark></h1></center>
-<form action="/search" method="post">
+<center><h1 style="color: blue; font-weight:500" class="m-5"><mark>Search for a Movie:</mark></h1></center>
+<form>
     <div>
-        <!-- <input autocomplete="off" autofocus class="form-control" name="title" placeholder= "Title of Movie" type="text"> -->
-        <textarea type = "submit" id="textarea" name="title" value="{{ request.GET.title}}"></textarea>
-        <label for="textarea">Search</label>
-    </div>
+        {% csrf_token %}
+        <input id="textarea1" name="title" value="{{ request.GET.title }}"  placeholder= "Title of Movie" type="text">
+    </div><br>
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
+{% endblock %}

@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 # Create your models here.
 
-class User(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to = 'profile_images', blank=True)
 
@@ -27,9 +27,9 @@ class Genre(models.Model):
 
 class Movie(models.Model):
 
-    movie_id = models.CharField(primary_key=True, unique=True)
+    movie_id = models.CharField(max_length=20, primary_key=True, unique=True)
     title = models.CharField(max_length=200, unique=True)
-    year = models.IntegerField(max_length=10, blank = True)
+    year = models.IntegerField(blank = True)
     genre = models.ManyToManyField(Genre, blank=True)
     language = models.CharField(max_length=250, blank=True)
     poster = models.URLField(blank = True)
@@ -40,13 +40,13 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
-class Review:
+class Review(models.Model):
     review_id = models.IntegerField(unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
     review= models.TextField(unique=False, null=False)
     review_number = models.SmallIntegerField(unique=False, null=False)
 
     def __str__(self):
-        return self.review_id
+        return self.review

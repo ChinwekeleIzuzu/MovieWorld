@@ -1,5 +1,5 @@
 from django.contrib import admin
-from movieworld.models import User, Movie, Review, Genre
+from movieworld.models import UserProfile, Movie, Review, Genre
 
 
 # Register your models here.
@@ -15,4 +15,4 @@ from movieworld.models import User, Movie, Review, Genre
 # admin.site.register(User) 
 # admin.site.register(Genre)
 
-admin.site.register(User)
+admin.site.register(UserProfile)

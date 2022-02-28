@@ -1,3 +1,4 @@
+from genericpath import exists
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -27,23 +28,23 @@ def index(request):
 	return response
     
 def search(request):
+    
     query = request.GET.get('title')
-
     if query:
         url = 'http://www.omdbapi.com/?apikey=394a7f6d&s=' + query
         response = requests.get(url)
         movie_data = response.json()
-
+        
         context_dict = {
-            'query': query,
-            'movie_data': movie_data,
-            'page_no': 1,
-            }
+                'query': query,
+                'movie_data': movie_data,
+                'page_no': 1,
+                }
 
-        template = loader.get_template('result.html')
-
+        template = loader.get_template('movieworld/result.html')
         return HttpResponse(template.render(context_dict, request))
-    return render(request, 'search.html')
+
+    return render(request, 'movieworld/search.html')
 
 def movieDetails(request, imdb_id):
     if Movie.objects.filter(movie_id=imdb_id).exists():
@@ -69,7 +70,7 @@ def movieDetails(request, imdb_id):
                 year=movie_data['Year'],
                 genre=movie_data[''],
                 language=movie_data['Language'],
-                 poster_url=movie_data['poster'],
+                poster_url=movie_data['poster'],
                 )
 
             m.Genre.set(genre_objs)
@@ -98,13 +99,13 @@ def page(request, query, page_no):
             'page_no': page_no,
             }
 
-    template = loader.get_template('result.html')
-    return HttpResponse(template.render(context_dict,request))
+    template = loader.get_template('movieworld/result.html')
+    return HttpResponse(template.render(context_dict, request))
 
 #@Author Xinyao 
 def about(request):
 	context_dict = {}
-	return render(request, 'movieworld/about.html',context_dict)
+	return render(request, 'movieworld/about.html', context_dict)
 
 #@Author Tang 
 def sign_up(request):
