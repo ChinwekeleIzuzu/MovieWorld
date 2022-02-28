@@ -1,0 +1,18 @@
+{% extends 'movieworld/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Search
+{% endblock %}
+
+{% block body_block %}
+
+<center><h1 style="color: blue; font-weight:500" class="m-5"><mark>Search for a Movie:</mark></h1></center>
+<form>
+    <div>
+        {% csrf_token %}
+        <input id="textarea1" name="title" value="{{ request.GET.title }}"  placeholder= "Title of Movie" type="text">
+    </div><br>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{% endblock %}
