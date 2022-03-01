@@ -1,18 +1,14 @@
 from django.contrib import admin
+from movieworld.models import UserProfile
+from movieworld.models import Review
 from movieworld.models import UserProfile, Movie, Review, Genre
-
-
 # Register your models here.
 
-# class MovieAdmin(admin.ModelAdmin):
-#     list_display = ('movie_id', 'title', 'year', 'genre', 'language')
+class ReviewAdmin(admin.ModelAdmin):
+	list_display=('review','user','date')
 
-# class ReviewAdmin(admin.ModelAdmin):
-#     fields = ('review_id', 'username', 'movie_id', 'date', 'review', 'review_number')
 
-# admin.site.register(Movie)
-# admin.site.register(Review)
-# admin.site.register(User) 
-# admin.site.register(Genre)
-
+admin.site.register(Review, ReviewAdmin)
 admin.site.register(UserProfile)
+admin.site.register(Movie)
+admin.site.register(Genre)
