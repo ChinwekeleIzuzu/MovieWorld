@@ -1,0 +1,51 @@
+{% extends 'movieworld/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Movies | {{ movie_data.Title }}
+{% endblock %}
+
+{% block body_block %}
+    {% if database is True %}
+        <img src="{{ movie_data.Poster.url }}">
+    {% else %}
+        <img src="{{ movie_data.Poster }}">
+    {% endif %}
+<div>
+    <h1> Title: {{ movie_data.Title }} </h1>
+    <h5> Year: {{  movie_data.Year }} </h5>
+    <h5> Language: {{ movie_data.Language }} </h5>
+    {% if database is True %}
+        <h5>Genre: {% for genre in movie_data.Genre.all %}<b>{{ genre }}</b>{% endfor %}</h5>
+    {% else %}
+        <p>Genre: <b>{{ movie_data.Genre }} </b></p>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'movieworld:rating' movie_data.imdbID %}">Review</a>
+</div>
+
+<div>
+    <h4><b>REVIEWS:</b></h4><br>
+
+    {% for review in reviews %}
+    <li>
+        {% if review.user.profile.picture %}
+            <img src="{{ review.user.profile.picture.url }}" alt="">
+        {% else %}
+            <img src="{% static 'img/no_avatar.jpg' %}" alt="">
+        {% endif %}
+
+        <p>@{{ review.user.username }}</p>
+        <p>{{ review.date }}</p>
+        <p>{{ review.review_number }} / 10</p>
+        <p>{{ review.review }} / 10</p>
+        <!-- <a href="{% url 'user-review' review.user.username movie_data.imdbID %}" class="secondary-content"><i class="material-icons">grade</i>{{ review.rate }} / 10</a> -->
+    </li>
+    {% endfor %}
+</div>
+    
+    
+    
+    
+{% endblock %}

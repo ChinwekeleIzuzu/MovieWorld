@@ -12,4 +12,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('search', views.search, name='search'),
     path('search/<query>/page/<page_no>/', views.page, name='page'),
+    path('<imdb_id>', views.movieDetails, name='details'),
+    path('<imdb_id>/review', views.review, name='rating'),
+    # path('genre/<slug:genre_slug>', views.genres, name='genres'),
 ]

@@ -8,7 +8,9 @@ import requests
 from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from movieworld.forms import UserForm, UserProfileForm
+from movieworld.forms import UserForm, UserProfileForm, RateForm
+# from django.core.paginator import Paginator
+# from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 
@@ -49,7 +51,15 @@ def search(request):
 def movieDetails(request, imdb_id):
     if Movie.objects.filter(movie_id=imdb_id).exists():
         movie_data = Movie.objects.get(movie_id=imdb_id)
+        reviews = Review.objects.filter(movie_id=movie_data)
         database = True
+
+        context = {
+			'movie_data': movie_data,
+			'reviews': reviews,
+			'database': database,
+		}
+
     else:
         url = 'http://www.omdbapi.com/?apikey=394a7f6d&i=' + imdb_id
         response = requests.get(url)
@@ -64,16 +74,30 @@ def movieDetails(request, imdb_id):
             g, created = Genre.objects.get_or_create(title=genre, slug=genre_slug)
             genre_objs.append(g)
 
+        if movie_data['Type'] == 'movie':
             m, created = Movie.objects.get_or_create(
                 movie_id=movie_data['imdbID'],
                 title=movie_data['Title'],
                 year=movie_data['Year'],
-                genre=movie_data[''],
                 language=movie_data['Language'],
-                poster_url=movie_data['poster'],
+                poster=movie_data['Poster'],
+                plot=movie_data['Plot'],
                 )
 
-            m.Genre.set(genre_objs)
+            m.genre.set(genre_objs)
+
+        else:
+            m, created = Movie.objects.get_or_create(
+                movie_id=movie_data['imdbID'],
+                title=movie_data['Title'],
+                year=movie_data['Year'],
+                language=movie_data['Language'],
+                poster=movie_data['Poster'],
+                totalSeasons=movie_data['totalSeasons'],
+                plot=movie_data['Plot'],
+                )
+            m.genre.set(genre_objs)
+
         m.save()
         database = False
 
@@ -82,7 +106,7 @@ def movieDetails(request, imdb_id):
             'database': database,
         }
 
-        template = loader.get_template('result.html') # stILL TO WORK ON THIS.
+        template = loader.get_template('movieworld/reviews.html')
 
         return HttpResponse(template.render(context, request))
 
@@ -101,6 +125,30 @@ def page(request, query, page_no):
 
     template = loader.get_template('movieworld/result.html')
     return HttpResponse(template.render(context_dict, request))
+
+def review(request, imdb_id):
+	movie = Movie.objects.get(movie_id=imdb_id)
+	user = request.user
+
+	if request.method == 'POST':
+		form = RateForm(request.POST)
+		if form.is_valid():
+			rate = form.save(commit=False)
+			rate.user = user
+			rate.movie = movie
+			rate.save()
+			return HttpResponseRedirect(reverse('details', args=[imdb_id]))
+	else:
+		form = RateForm()
+
+	template = loader.get_template('movieworld/review.html')
+
+	context = {
+		'form': form, 
+		'movie': movie,
+	}
+
+	return HttpResponse(template.render(context, request))
 
 #@Author Xinyao 
 def about(request):
@@ -161,3 +209,4 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('movieworld:index'))
+
