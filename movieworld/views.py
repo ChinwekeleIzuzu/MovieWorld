@@ -1,14 +1,14 @@
-from genericpath import exists
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
-from movieworld.models import Movie, Genre, Review, UserProfile
+from movieworld.models import Movies, Genre, Review, UserProfile
 import requests
 from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from movieworld.forms import UserForm, UserProfileForm, RateForm
+from django.contrib.auth.models import User
 # from django.core.paginator import Paginator
 # from django.shortcuts import render, get_object_or_404
 
@@ -49,8 +49,8 @@ def search(request):
     return render(request, 'movieworld/search.html')
 
 def movieDetails(request, imdb_id):
-    if Movie.objects.filter(movie_id=imdb_id).exists():
-        movie_data = Movie.objects.get(movie_id=imdb_id)
+    if Movies.objects.filter(movie_id=imdb_id).exists():
+        movie_data = Movies.objects.get(movie_id=imdb_id)
         reviews = Review.objects.filter(movie_id=movie_data)
         database = True
 
@@ -59,7 +59,7 @@ def movieDetails(request, imdb_id):
 			'reviews': reviews,
 			'database': database,
 		}
-
+        
     else:
         url = 'http://www.omdbapi.com/?apikey=394a7f6d&i=' + imdb_id
         response = requests.get(url)
@@ -74,29 +74,17 @@ def movieDetails(request, imdb_id):
             g, created = Genre.objects.get_or_create(title=genre, slug=genre_slug)
             genre_objs.append(g)
 
-        if movie_data['Type'] == 'movie':
-            m, created = Movie.objects.get_or_create(
-                movie_id=movie_data['imdbID'],
-                title=movie_data['Title'],
-                year=movie_data['Year'],
-                language=movie_data['Language'],
-                poster=movie_data['Poster'],
-                plot=movie_data['Plot'],
-                )
+        
+        m, created = Movies.objects.get_or_create(
+            movie_id=movie_data['imdbID'],
+            title=movie_data['Title'],
+            year=movie_data['Year'],
+            language=movie_data['Language'],
+            poster_url=movie_data['Poster'],
+            plot=movie_data['Plot'],
+            )
 
-            m.genre.set(genre_objs)
-
-        else:
-            m, created = Movie.objects.get_or_create(
-                movie_id=movie_data['imdbID'],
-                title=movie_data['Title'],
-                year=movie_data['Year'],
-                language=movie_data['Language'],
-                poster=movie_data['Poster'],
-                totalSeasons=movie_data['totalSeasons'],
-                plot=movie_data['Plot'],
-                )
-            m.genre.set(genre_objs)
+        m.genre.set(genre_objs)
 
         m.save()
         database = False
@@ -106,9 +94,9 @@ def movieDetails(request, imdb_id):
             'database': database,
         }
 
-        template = loader.get_template('movieworld/reviews.html')
+    template = loader.get_template('movieworld/reviews.html')
 
-        return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(context, request))
 
 def page(request, query, page_no):
     url = 'http://www.omdbapi.com/?apikey=394a7f6d&s=' + query + '&page=' + str(page_no)
@@ -127,7 +115,7 @@ def page(request, query, page_no):
     return HttpResponse(template.render(context_dict, request))
 
 def review(request, imdb_id):
-	movie = Movie.objects.get(movie_id=imdb_id)
+	movie = Movies.objects.get(movie_id=imdb_id)
 	user = request.user
 
 	if request.method == 'POST':

@@ -19,7 +19,7 @@
         <tbody>
             {% for movie in movie_data.Search %}
             <tr>
-                <td><a href="{% url 'movieworld:details' movie.imdbID%}">{{ movie.imdbID }}</a></td>
+                <td><a href="{% url 'movieworld:details' movie.imdbID %}">{{ movie.imdbID }}</a></td>
                 <td>{{ movie.Title }}</td>
                 <td>{{ movie.Year }}</td>
                 <td><img src="{{ movie.Poster }}"></td>
