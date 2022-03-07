@@ -28,7 +28,8 @@ def index(request):
 	
 	response = render(request, 'movieworld/index.html', context=context_dict)
 	return response
-    
+
+@login_required   
 def search(request):
     
     query = request.GET.get('title')
@@ -48,8 +49,10 @@ def search(request):
 
     return render(request, 'movieworld/search.html')
 
+
+@login_required
 def movieDetails(request, imdb_id):
-    if Movie.objects.filter(imdbID=imdb_id).exists():
+    if Movie.objects.filter(movie_id=imdb_id).exists():
         movie_data = Movie.objects.get(movie_id=imdb_id)
         reviews = Review.objects.filter(movie=movie_data)
         database = True
@@ -76,7 +79,7 @@ def movieDetails(request, imdb_id):
 
         
         m, created = Movie.objects.get_or_create(
-            imdbID=movie_data['imdbID'],
+            movie_id=movie_data['imdbID'],
             title=movie_data['Title'],
             year=movie_data['Year'],
             language=movie_data['Language'],
@@ -98,6 +101,7 @@ def movieDetails(request, imdb_id):
 
     return HttpResponse(template.render(context, request))
 
+@login_required
 def page(request, query, page_no):
     url = 'http://www.omdbapi.com/?apikey=394a7f6d&s=' + query + '&page=' + str(page_no)
     response = requests.get(url)
@@ -114,6 +118,7 @@ def page(request, query, page_no):
     template = loader.get_template('movieworld/result.html')
     return HttpResponse(template.render(context_dict, request))
 
+@login_required
 def review(request, imdb_id):
 	movie = Movie.objects.get(movie_id=imdb_id)
 	user = request.user

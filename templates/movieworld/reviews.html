@@ -45,9 +45,11 @@
                 <img src="{% static 'img/avatar.jpg' %}" alt="">
             {% endif %}
 
-                <p>@{{ review.user.username }}</p>
-                <p>{{ review.date }}</p>
-                <p>{{ review.review_number }}/5</p>
+                <div>@{{ review.user.username }}</div>
+                <div>{{ review.date }}</div>
+                <div>{{ review.review_number }}/5</div>
+                <div>{{ review.review }}</div>
+                
             </li>
         {% endfor %}
     </div>
