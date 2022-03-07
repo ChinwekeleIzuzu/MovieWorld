@@ -7,15 +7,15 @@
 
 {% block body_block %}
     {% if database is True %}
-        <img src="{{ movie_data.poster.url }}">
+        <img src="{{ movie_data.Poster.url }}">
         <div>
-            <h1> Title: {{ movie_data.title }} </h1>
-            <h5> Year: {{  movie_data.year }} </h5>
-            <h5> Language: {{ movie_data.language }} </h5>
-            <p>Genre: {% for genre in movie_data.genre.all %}<b>{{ genre }}</b>{% endfor %}</p>
+            <h1> Title: {{ movie_data.Title }} </h1>
+            <h5> Year: {{  movie_data.Year }} </h5>
+            <h5> Language: {{ movie_data.Language }} </h5>
+            <p>Genre: {% for genre in movie_data.Genre.all %}<b>{{ genre }}</b>{% endfor %}</p>
         </div>
         <div>
-            <a href="{% url 'movieworld:reviews' movie_data.movie_id %}">Review</a>
+            <a href="{% url 'movieworld:reviews' movie_data.imdbID %}">Review</a>
         </div>
     {% else %}
         <img src="{{ movie_data.Poster }}">

@@ -18,9 +18,9 @@ class UserProfileForm(forms.ModelForm):
         fields = ('picture',)
 
 class RateForm(forms.ModelForm):
-	text = forms.CharField(widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), required=False)
-	rate = forms.ChoiceField(choices=CHOICES, widget=forms.Select(), required=True)
+	review = forms.CharField(widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), required=False)
+	review_number = forms.ChoiceField(choices=CHOICES, widget=forms.Select(), required=True)
 
 	class Meta:
 		model = Review
-		fields = ('text', 'rate')
+		fields = ('review', 'review_number')

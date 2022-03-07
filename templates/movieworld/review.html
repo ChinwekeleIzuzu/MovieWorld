@@ -7,18 +7,18 @@
 
 {% block body_block %}
     <div>
-        <img src="{{ movie.poster.url }}">
+        <img src="{{ movie.Poster.url }}">
         <div>
-            <b>{{ movie.title }}</b>
+            <b>{{ movie.Title }}</b>
             <br>
-            <p>{{ movie.plot }}</p>
+            <p>{{ movie.Plot }}</p>
             <form method="post" action="" role="form" >
                 {% csrf_token %}
             <div>
-                {{ form.rate }}
+                {{ form.review_number }}
             </div>
             <div>
-                {{ form.text }}
+                {{ form.review }}
               <label for="textarea1">Comment</label>
             </div>
 

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
-from movieworld.models import Movies, Genre, Review, UserProfile
+from movieworld.models import Movie, Genre, Review, UserProfile
 import requests
 from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
@@ -49,9 +49,9 @@ def search(request):
     return render(request, 'movieworld/search.html')
 
 def movieDetails(request, imdb_id):
-    if Movies.objects.filter(movie_id=imdb_id).exists():
-        movie_data = Movies.objects.get(movie_id=imdb_id)
-        reviews = Review.objects.filter(movie_id=movie_data)
+    if Movie.objects.filter(imdbID=imdb_id).exists():
+        movie_data = Movie.objects.get(imdbID=imdb_id)
+        reviews = Review.objects.filter(movie=movie_data)
         database = True
 
         context = {
@@ -75,16 +75,16 @@ def movieDetails(request, imdb_id):
             genre_objs.append(g)
 
         
-        m, created = Movies.objects.get_or_create(
-            movie_id=movie_data['imdbID'],
-            title=movie_data['Title'],
-            year=movie_data['Year'],
-            language=movie_data['Language'],
-            poster_url=movie_data['Poster'],
-            plot=movie_data['Plot'],
+        m, created = Movie.objects.get_or_create(
+            imdbID=movie_data['imdbID'],
+            Title=movie_data['Title'],
+            Year=movie_data['Year'],
+            Language=movie_data['Language'],
+            Poster_url=movie_data['Poster'],
+            Plot=movie_data['Plot'],
             )
 
-        m.genre.set(genre_objs)
+        m.Genre.set(genre_objs)
 
         m.save()
         database = False
@@ -115,7 +115,7 @@ def page(request, query, page_no):
     return HttpResponse(template.render(context_dict, request))
 
 def review(request, imdb_id):
-	movie = Movies.objects.get(movie_id=imdb_id)
+	movie = Movie.objects.get(imdbID=imdb_id)
 	user = request.user
 
 	if request.method == 'POST':
@@ -125,7 +125,7 @@ def review(request, imdb_id):
 			rate.user = user
 			rate.movie = movie
 			rate.save()
-			return HttpResponseRedirect(reverse('details', args=[imdb_id]))
+			return HttpResponseRedirect(reverse('movieworld:details', args=[imdb_id]))
 	else:
 		form = RateForm()
 
