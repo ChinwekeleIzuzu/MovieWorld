@@ -6,9 +6,13 @@
 {% endblock %}
 
 {% block body_block %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/reviews.css'%}">
+</head>
     {% if database is True %}
         <img src="{{ movie_data.poster.url }}">
-        <div>
+        <div class="info">
             <h1> Title: {{ movie_data.title }} </h1>
             <h5> Year: {{  movie_data.year }} </h5>
             <h5> Language: {{ movie_data.language }} </h5>
@@ -19,7 +23,7 @@
         </div>
     {% else %}
         <img src="{{ movie_data.Poster }}">
-        <div>
+        <div class="info">
             <h1> Title: {{ movie_data.Title }} </h1>
             <h5> Year: {{  movie_data.Year }} </h5>
             <h5> Language: {{ movie_data.Language }} </h5>
@@ -30,7 +34,7 @@
         </div>
     {% endif %}
 
-    <div>
+    <div class="review">
         <h4><b>REVIEWS:</b></h4><br>
 
         {% for review in reviews %}

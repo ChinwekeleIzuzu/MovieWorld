@@ -7,12 +7,19 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Register for Movieworld</h1>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/sign_up.css'%}">
+</head>
+
+<center><h1>Register for Movieworld</h1></center>
 {% if registered %}
 <strong>Thanks for registering!</strong>
+
 <a href="{% url 'movieworld:index' %}">Return to the homepage.</a><br />
+
 {% else %}
-<strong>Register here!</strong><br />
+
 <form id="user_form" method="post" action="{% url 'movieworld:sign_up' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ user_form.as_p }}

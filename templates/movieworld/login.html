@@ -7,7 +7,12 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Login to Movieworld</h1>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/search.css'%}">
+</head>
+
+<center><h1>Login to Movieworld</h1></center>
 <form id="login_form" method="post" action="{% url 'movieworld:login' %}">
     {% csrf_token %}
     Username: <input type="text" name="username" value="" size="50" />
