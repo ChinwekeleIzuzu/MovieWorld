@@ -1,0 +1,23 @@
+head{
+    color: #996600;
+}
+
+body {
+    color: #3a2700;
+    background-color: #FFFFCC;
+  }
+  
+h1 {
+    color: #996600;
+    margin-left: 20px;
+  }
+
+  h2 {
+    color: #ffffff;
+    background-color: #ffae00;
+  }
+
+  h3 {
+    color: #e26d00;
+    background-color: #FFFFCC;
+  }
