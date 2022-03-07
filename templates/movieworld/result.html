@@ -7,22 +7,26 @@
 
 {% block body_block %}
 
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/result.css'%}">
+</head>
+
   <table class="table table-bordered">
         <thead>
             <tr>
+                <th>Poster</th>
                 <th>ImdbID</th>
                 <th>Title</th>
                 <th>Year</th>
-                <th>Poster</th>
             </tr>
         </thead>
         <tbody>
             {% for movie in movie_data.Search %}
             <tr>
+                <td><img src="{{ movie.Poster }}"></td>
                 <td><a href="{% url 'movieworld:details' movie.imdbID %}">{{ movie.imdbID }}</a></td>
                 <td>{{ movie.Title }}</td>
                 <td>{{ movie.Year }}</td>
-                <td><img src="{{ movie.Poster }}"></td>
             </tr>
             {% endfor %}
         </tbody>

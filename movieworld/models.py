@@ -43,15 +43,15 @@ class Genre(models.Model):
 
 class Movie(models.Model):
 
-    imdbID = models.CharField(max_length=20, blank=True)
-    Title = models.CharField(max_length=200)
-    Year = models.CharField(max_length=25, blank = True)
-    Genre = models.ManyToManyField(Genre, blank=True)
-    Language = models.CharField(max_length=250, blank=True)
-    Poster = models.ImageField(upload_to='movies', blank = True)
-    Poster_url = models.URLField(blank=True)
-    TotalSeasons = models.CharField(max_length=3, blank=True)
-    Plot = models.CharField(max_length=900, blank=True)
+    movie_id = models.CharField(max_length=20, blank=True)
+    title = models.CharField(max_length=200)
+    year = models.CharField(max_length=25, blank = True)
+    genre = models.ManyToManyField(Genre, blank=True)
+    language = models.CharField(max_length=250, blank=True)
+    poster = models.ImageField(upload_to='movies', blank = True)
+    poster_url = models.URLField(blank=True)
+    totalSeasons = models.CharField(max_length=3, blank=True)
+    plot = models.CharField(max_length=900, blank=True)
 
     class Meta:
         verbose_name_plural = 'Movies'
@@ -60,13 +60,13 @@ class Movie(models.Model):
         return self.Title
 
     def save(self, *args, **kwargs):
-        if self.Poster == '' and self.Poster_url !='':
-            value = requests.get(self.Poster_url)
+        if self.poster == '' and self.poster_url !='':
+            value = requests.get(self.poster_url)
             pb = BytesIO()
             pb.write(value.content)
             pb.flush()
-            file_name = self.Poster_url.split("/")[-1]
-            self.Poster.save(file_name, files.File(pb), save=False)
+            file_name = self.poster_url.split("/")[-1]
+            self.poster.save(file_name, files.File(pb), save=False)
         return super().save(*args, **kwargs)
         
 CHOICES = [

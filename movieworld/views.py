@@ -50,7 +50,7 @@ def search(request):
 
 def movieDetails(request, imdb_id):
     if Movie.objects.filter(imdbID=imdb_id).exists():
-        movie_data = Movie.objects.get(imdbID=imdb_id)
+        movie_data = Movie.objects.get(movie_id=imdb_id)
         reviews = Review.objects.filter(movie=movie_data)
         database = True
 
@@ -77,14 +77,14 @@ def movieDetails(request, imdb_id):
         
         m, created = Movie.objects.get_or_create(
             imdbID=movie_data['imdbID'],
-            Title=movie_data['Title'],
-            Year=movie_data['Year'],
-            Language=movie_data['Language'],
-            Poster_url=movie_data['Poster'],
-            Plot=movie_data['Plot'],
+            title=movie_data['Title'],
+            year=movie_data['Year'],
+            language=movie_data['Language'],
+            poster_url=movie_data['Poster'],
+            plot=movie_data['Plot'],
             )
 
-        m.Genre.set(genre_objs)
+        m.genre.set(genre_objs)
 
         m.save()
         database = False
@@ -115,7 +115,7 @@ def page(request, query, page_no):
     return HttpResponse(template.render(context_dict, request))
 
 def review(request, imdb_id):
-	movie = Movie.objects.get(imdbID=imdb_id)
+	movie = Movie.objects.get(movie_id=imdb_id)
 	user = request.user
 
 	if request.method == 'POST':

@@ -7,11 +7,11 @@
 
 {% block body_block %}
     <div>
-        <img src="{{ movie.Poster.url }}">
+        <img src="{{ movie.poster.url }}">
         <div>
-            <b>{{ movie.Title }}</b>
+            <b>{{ movie.title }}</b>
             <br>
-            <p>{{ movie.Plot }}</p>
+            <p>{{ movie.plot }}</p>
             <form method="post" action="" role="form" >
                 {% csrf_token %}
             <div>
