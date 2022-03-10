@@ -1,0 +1,31 @@
+{% extends 'movieworld/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Movies
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="header">
+	    <h2><strong>Movie World!</strong></h2> 
+    </div>
+
+    <div>
+    <center><h2>Reviewed Movies</h2>
+		
+			
+		{% if movies %}
+			<ul>
+			{% for movie in movies %}
+				<li>
+					<p><td><a href="{% url 'movieworld:details' movie.title %}">{{ movie.title }}</a></td></p>
+				</li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>There are no movie present.</p>
+		{% endif %}</center></div>
+  </div>	
+
+{% endblock %}

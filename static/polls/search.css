@@ -1,3 +1,16 @@
 form {
     text-align: center;
 }
+
+body {
+    background-image: url('../static/img/movies.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  
+  }
+  
+  mark {
+    background: white;
+    color: #003366;
+  }

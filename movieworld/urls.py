@@ -14,4 +14,5 @@ urlpatterns = [
     path('search/<query>/page/<page_no>/', views.page, name='page'),
     path('<imdb_id>', views.movieDetails, name='details'),
     path('<imdb_id>/review', views.review, name='reviews'),
+    path('reviewed', views.allMovies, name='allmovies'),
 ]

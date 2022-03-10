@@ -57,7 +57,7 @@ class Movie(models.Model):
         verbose_name_plural = 'Movies'
 
     def __str__(self):
-        return self.Title
+        return self.title
 
     def save(self, *args, **kwargs):
         if self.poster == '' and self.poster_url !='':

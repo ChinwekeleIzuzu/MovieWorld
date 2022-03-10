@@ -5,7 +5,9 @@
 
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'polls/baseStyle.css' %}">
+        <link rel="stylesheet" href="{% static 'polls/baseStyle.css' %}">
+
+        <link href="{% static '/img/logo4.jpg' %}" rel="icon">
         <title>
             MovieWorld - 
             {% block title_block %}
@@ -18,9 +20,11 @@
             <ul>
                 {% if user.is_authenticated %}
                 <li style="float:right"><a href="{% url 'movieworld:logout' %}">Logout</a></li>
+                <li style="float:right"><a href="{% url 'movieworld:allmovies' %}">Reviews</a></li>
                 {% else %}
                 <li style="float:right"><a href="{% url 'movieworld:sign_up' %}">Sign Up</a></li>
-                <li style="float:right"><a href="{% url 'movieworld:login' %}">Login</a></li>            
+                <li style="float:right"><a href="{% url 'movieworld:login' %}">Login</a></li>
+                <li style="float:right"><a href="{% url 'movieworld:login' %}">Login</a></li>           
                 {% endif %}
                 <li><a href="{% url 'movieworld:index' %}">Index</a></li>
                 <li style="float:right"><a href="{% url 'movieworld:about' %}">About</a ></li>
@@ -38,6 +42,10 @@
             {% endblock %}
         </div>
         <hr />
+
+        <footer class="footer">
+            Group One ITECH Project
+        </footer>
     </body>
     
 </html>

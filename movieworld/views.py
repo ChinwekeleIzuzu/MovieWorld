@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -20,11 +21,11 @@ from django.contrib.auth.models import User
 #@Author Xinyao 
 
 def index(request):	
-    # Need to build models and forms for Review
-	# top5movies_list = Review.objects.order_by('-rating')[:5]
+    
+	top5movies_list = Movie.objects.order_by('title')[:5]
 
 	context_dict = {}
-	# context_dict['top5movies'] = top5movies_list
+	context_dict['movies'] = top5movies_list
 	
 	response = render(request, 'movieworld/index.html', context=context_dict)
 	return response
@@ -142,6 +143,17 @@ def review(request, imdb_id):
 	}
 
 	return HttpResponse(template.render(context, request))
+
+def allMovies(request):
+
+    movies_list = Movie.objects.order_by('title')
+    
+    context_dict = {}
+    context_dict['movies'] = movies_list
+    
+    response = render(request, 'movieworld/allmovies.html', context=context_dict)
+    
+    return response
 
 #@Author Xinyao 
 def about(request):

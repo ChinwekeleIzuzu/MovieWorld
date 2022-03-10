@@ -76,24 +76,18 @@
 	<div class="column" style="background-color:#ccc;">
 		<center><h2>Top 5 Movies</h2>
 		
-		<!-- Will revise after the models and forms are built -->
+			
 		{% if movies %}
 			<ul>
-				{% for movie in movies %}
-					<li>
-						
-					</li>
-				{% endfor %}
+			{% for movie in movies %}
+				<li>
+					<p>{{ movie.title }}</p>
+				</li>
+			{% endfor %}
 			</ul>
 		{% else %}
 			<p>There are no movie present.</p>
 		{% endif %}</center></div>
-  </div>
-  
-  <div class="footer">
-	<p>Produced by Group 1</p>
-  </div>
-  
-	
+  </div>	
 
 {% endblock %}
