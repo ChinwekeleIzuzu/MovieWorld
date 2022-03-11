@@ -18,17 +18,16 @@
     <body>
         <div>
             <ul>
+                <li><a href="{% url 'movieworld:index' %}">Index</a></li>
                 {% if user.is_authenticated %}
                 <li style="float:right"><a href="{% url 'movieworld:logout' %}">Logout</a></li>
                 <li style="float:right"><a href="{% url 'movieworld:movies' %}">Reviews</a></li>
+                <li><a href="{% url 'movieworld:search' %}">Search Your Movie</a ></li>
                 {% else %}
                 <li style="float:right"><a href="{% url 'movieworld:sign_up' %}">Sign Up</a></li>
-                <li style="float:right"><a href="{% url 'movieworld:login' %}">Login</a></li>
                 <li style="float:right"><a href="{% url 'movieworld:login' %}">Login</a></li>           
                 {% endif %}
-                <li><a href="{% url 'movieworld:index' %}">Index</a></li>
                 <li style="float:right"><a href="{% url 'movieworld:about' %}">About</a ></li>
-                <li><a href="{% url 'movieworld:movies' %}">Search Your Movie</a ></li>
             </ul>
         </div>
         <div>
