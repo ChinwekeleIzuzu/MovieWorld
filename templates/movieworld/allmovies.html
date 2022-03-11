@@ -19,7 +19,7 @@
 			<ul>
 			{% for movie in movies %}
 				<li>
-					<p><td><a href="{% url 'movieworld:details' movie.title %}">{{ movie.title }}</a></td></p>
+					<p><a href="{% url 'movieworld:details' movie.movie.movie_id %}">{{ movie.movie }}</a></p>
 				</li>
 			{% endfor %}
 			</ul>
