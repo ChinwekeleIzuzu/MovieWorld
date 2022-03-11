@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
-from movieworld.models import Movie, Genre, Review, UserProfile
+from movieworld.models import Movie, Review, UserProfile
 import requests
 from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
@@ -68,27 +68,16 @@ def movieDetails(request, imdb_id):
         url = 'http://www.omdbapi.com/?apikey=394a7f6d&i=' + imdb_id
         response = requests.get(url)
         movie_data = response.json()
-
-        genre_objs = []
-
-        genre_list = list(movie_data['Genre'].replace(" ", "").split(','))
-
-        for genre in genre_list:
-            genre_slug = slugify(genre)
-            g, created = Genre.objects.get_or_create(title=genre, slug=genre_slug)
-            genre_objs.append(g)
-
         
         m, created = Movie.objects.get_or_create(
             movie_id=movie_data['imdbID'],
             title=movie_data['Title'],
             year=movie_data['Year'],
+            genre=movie_data['Genre'],
             language=movie_data['Language'],
             poster_url=movie_data['Poster'],
             plot=movie_data['Plot'],
             )
-
-        m.genre.set(genre_objs)
 
         m.save()
         database = False
@@ -144,16 +133,14 @@ def review(request, imdb_id):
 
 	return HttpResponse(template.render(context, request))
 
-def allMovies(request):
 
-    movies_list = Movie.objects.order_by('title')
-    
+def movies(request):
+
+    top5movies_list = Review.objects.order_by('-review_number')[:5]
     context_dict = {}
-    context_dict['movies'] = movies_list
+    context_dict['movies'] = top5movies_list
     
-    response = render(request, 'movieworld/allmovies.html', context=context_dict)
-    
-    return response
+    return render(request, 'movieworld/allmovies.html', context=context_dict)
 
 #@Author Xinyao 
 def about(request):

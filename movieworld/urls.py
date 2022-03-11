@@ -10,9 +10,10 @@ urlpatterns = [
     path('sign_up/', views.sign_up, name='sign_up'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
+    path('movies', views.movies, name='movies'),
     path('search', views.search, name='search'),
     path('search/<query>/page/<page_no>/', views.page, name='page'),
     path('<imdb_id>', views.movieDetails, name='details'),
     path('<imdb_id>/review', views.review, name='reviews'),
-    path('reviewed', views.allMovies, name='allmovies'),
+    
 ]

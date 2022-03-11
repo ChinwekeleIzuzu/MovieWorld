@@ -25,28 +25,13 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-class Genre(models.Model):
-    title = models.CharField(max_length=30)
-    slug = models.SlugField(null=False, unique=True)
-
-    def get_absolute_url(self):
-        return reverse('genres', args=[self.slug])
-
-    def __str__(self):
-        return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.title.replace(" ", "")
-            self.slug = slugify(self.title)
-        return super().save(*args, **kwargs)
 
 class Movie(models.Model):
 
     movie_id = models.CharField(max_length=20, blank=True)
     title = models.CharField(max_length=200)
     year = models.CharField(max_length=25, blank = True)
-    genre = models.ManyToManyField(Genre, blank=True)
+    genre = models.CharField(max_length=250, blank=True)
     language = models.CharField(max_length=250, blank=True)
     poster = models.ImageField(upload_to='movies', blank = True)
     poster_url = models.URLField(blank=True)
