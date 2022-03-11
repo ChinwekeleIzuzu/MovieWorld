@@ -1,5 +1,108 @@
-form {
-    margin: auto;
-  width: 50%;
-  padding: 20px;
+.form {
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 30%;
+  padding: 20px  40px;
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+}
+.title {
+  font-size: 40px;
+ font-family: cursive;
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+.inputdiv {
+  position: relative;
+  height: 35px;
+  width: 90%;
+  margin-bottom: 25px;
+}
+.input{
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  font-size: 15px;
+  background: none;
+  border-radius: 10px;
+  border: dashed #D3D3D3; 
+  z-index: 1;
+}
+::placeholder {
+  color: transparent;
+}
+.label {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  padding: 0 4px;
+  background-color: white;
+  color: grey;
+  font-size: 15px;
+  z-index: 0;
+}
+.span{
+  margin-bottom:10px;
+  margin-left:15px;
+}
+.pclass{
+  font-size:15px; 
+  font-family:Verdana;
+  margin-left:20px;
+}
+.msg{
+  margin-left:20%;
+  font-size:20px;
+  font-family:didot;
+  color:red;
+  font-weight:400;
+}
+.picturelabel{
+  margin-left:20px;
+  font-size:15px;
+  font-weight:600;
+  font-family: verdana;
+  display:inline;
+}
+.picturefile{
+  display:inline;
+  margin-left: 10px;
+  font-size:15px;
+}
+#submit {
+  margin-left:35%;
+  margin-top:20px;
+  padding: 16px 25px;
+  border-radius: 15px;
+  background-color: black;
+  color: white;
+  font-size: 17px;
+  font-family:verdana;
+}
+#submit:hover {
+  background-color: #666666;
+  transform: translateY(-3px);
+}
+.input:focus + .label {
+  left: 10px;
+  top: -8px;
+  font-size: 15px;
+  font-weight: 800;
+  color: black;
+  z-index: 5;
+}
+.input:focus {
+  border: solid black;
+}
+.input:not(:placeholder-shown)+ .label {
+  left: 10px;
+  top: -8px;
+  font-size: 15px;
+  font-weight: 800;
+  z-index:5;
 }

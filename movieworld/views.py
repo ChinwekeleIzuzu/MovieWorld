@@ -1,6 +1,6 @@
 from contextlib import nullcontext
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,  JsonResponse
 from django.urls import reverse
 from django.template import loader
 from movieworld.models import Movie, Review, UserProfile
@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from movieworld.forms import UserForm, UserProfileForm, RateForm
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+import json
 # from django.core.paginator import Paginator
 # from django.shortcuts import render, get_object_or_404
 
@@ -176,8 +178,12 @@ def sign_up(request):
     
     return render(request, 'movieworld/sign_up.html', context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-#@Author Tang 
 def user_login(request):
+    return render(request, 'movieworld/login.html')
+
+#@Author Tang 
+@csrf_exempt
+def login_check(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -186,13 +192,12 @@ def user_login(request):
 
         if user:
             if user.is_active:
-                login(request, user)
-                return redirect(reverse('movieworld:index'))
+                 login(request, user)
+                 return JsonResponse({'res':1})
             else:
-                return HttpResponse("Your account is disabled.")
+                 return JsonResponse({'res':2})
         else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            return JsonResponse({'res':0})
     else:
         return render(request, 'movieworld/login.html')
 

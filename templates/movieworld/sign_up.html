@@ -1,4 +1,3 @@
-<!-- @Author Tang -->
 {% extends 'movieworld/base.html' %}
 {% load staticfiles %}
 
@@ -7,25 +6,57 @@
 {% endblock %}
 
 {% block body_block %}
-
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'polls/sign_up.css'%}">
 </head>
 
-<center><h1>Register for Movieworld</h1></center>
 {% if registered %}
-<strong>Thanks for registering!</strong>
-
-<a href="{% url 'movieworld:index' %}">Return to the homepage.</a><br />
+    <strong>Thanks for registering!</strong>
+    <a href="{% url 'movieworld:index' %}">Return to the homepage.</a><br />
 
 {% else %}
+    <div class='form'>
+    <h1 class='title'>Sign up</h1>
+    <form id="user_form" method="post" action="{% url 'movieworld:sign_up' %}" enctype="multipart/form-data"  >
 
-<form id="user_form" method="post" action="{% url 'movieworld:sign_up' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
 
-    <input type="submit" name="submit" value="Register" />
-</form>
+    <div class='span'><span id="usernameSpan"></span></div>
+    <div class='inputdiv'>
+        <input type="text" class='input' name="username" id='username' value="" size="50" placeholder="a" />
+        <label class='label'>Username</label>
+    </div>
+
+    <div class='span'><span id="passwordSpan"></span></div>
+    <div class='inputdiv'>
+        <input type="password" class='input' name="password" id='password' value="" size="50" placeholder="a" />
+        <label class='label'>Password</label>
+    </div>
+
+    <div class='span'><span id="confirmSpan"></span></div>
+    <div class='inputdiv'>
+        <input type="password" class='input' name="confirm" id='confirm' value="" size="50" placeholder="a" />
+        <label class='label'>Confirm Password</label>
+    </div>
+
+    <div class='pclass'>
+        <p>Your password must be: </p>
+        <p id='firstline'> 8 characters or more (no spaces) </p>
+        <p id='secondline'> 1 lowercase letter </p>
+        <p id='thirdline'> 1 uppercase letter </p>
+        <p id="fourthline"> 1 number </p>
+    </div>
+
+    <div class="picturelabel"> {{profile_form.picture.label}}</div> 
+    <input type='file'  class='picturefile' />
+  
+    <input type="submit" name="submit"  id='submit' value="Register" />
+
+    </form>
+</div>
 {% endif %}
+
+<script src='{% static 'js/jquery-3.6.0.js' %}' ></script>
+<script src="{% static 'js/sign_up.js' %}" crossorigin="anonymous"></script>
+
 {% endblock %}
