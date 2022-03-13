@@ -16,7 +16,7 @@
             <h1> Title: {{ movie_data.title }} </h1>
             <h5> Year: {{  movie_data.year }} </h5>
             <h5> Language: {{ movie_data.language }} </h5>
-            <p>Genre: {% for genre in movie_data.genre.all %}<b>{{ genre }}</b>{% endfor %}</p>
+            <p>Genre:<b>{{ movie_data.genre }}</b></p>
         </div>
         <div>
             <a href="{% url 'movieworld:reviews' movie_data.movie_id%}">Review</a>

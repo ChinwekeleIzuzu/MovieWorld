@@ -156,5 +156,5 @@ def add_review(review, user, movie, date, review_number=0):
 
 
 if __name__ == '__main__':
-    print('Starting Rango population script')
+    print('Starting Movieworld population script')
     populate()
