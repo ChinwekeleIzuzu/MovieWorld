@@ -1,5 +1,6 @@
 form {
     text-align: center;
+    margin-bottom: 200px;
 }
 
 body {
@@ -7,10 +8,13 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-  
   }
   
-  mark {
+mark {
     background: white;
     color: #003366;
   }
+
+h1 {
+  margin-top: 200px;
+}

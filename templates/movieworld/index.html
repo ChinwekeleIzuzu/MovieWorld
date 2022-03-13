@@ -9,60 +9,7 @@
 
 {% block body_block %}
 <head>
-	<style>
-		* {
-		  box-sizing: border-box;
-		}
-		
-		body {
-		  font-family: Arial, Helvetica, sans-serif;
-		}
-		
-		/* Style the header */
-		.header {
-		
-		  background-color: #7e7e7e;
-		  padding: 30px;
-		  text-align: center;
-		  font-size: 35px;
-		  color: #f1f1f1;
-		  background-image: url("static/img/logo4.jpg");
-		}
-		
-		/* Create three equal columns that floats next to each other */
-		.column {
-		  float: left;
-		  width: 50%;
-		  padding: 10px;
-		}
-		
-		/* Clear floats after the columns */
-		.row:after {
-		  content: "";
-		  display: table;
-		  clear: both;
-		}
-		
-		/* Style the footer */
-		.footer {
-		  background-color: #f1f1f1;
-		  padding: 10px;
-		  text-align: center;
-		}
-		
-		/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-		@media (max-width: 600px) {
-		  .column {
-			width: 100%;
-		  }
-		}
-
-		img { 
- 			width: 100%;
-  			height: auto;
-  			opacity: 0.3;
-}
-		</style>
+	<link rel="stylesheet" type="text/css" href="{% static 'polls/index.css' %}">
 </head>
 
 <div class="header">
@@ -70,18 +17,18 @@
   </div>
   
   <div class="row">
-	<div class="column" style="background-color:#aaa;">
-		<center>Movie of the Week<br>
+	<div class="column" >
+		<center><h2>Movie of the Week<br></h2>
 			Harry Potter and the Philosopher's Stone(2001)</center></div>
-	<div class="column" style="background-color:#ccc;">
+	<div class="column" >
 		<center><h2>Top 5 Movies</h2>
 		
 			
 		{% if movies %}
-			<ul>
+			<ul class="list">
 			{% for movie in movies %}
 				<li>
-					<p><a href="{% url 'movieworld:details' movie.movie_id %}">{{ movie.title }}</a></p
+					<p>{{ movie.title }}</p>
 				</li>
 			{% endfor %}
 			</ul>

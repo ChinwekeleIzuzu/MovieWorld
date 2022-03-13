@@ -3,6 +3,7 @@ head{
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     color: #3a2700;
     background-color: #ffffff;
   }
@@ -11,6 +12,7 @@ h1 {
     color: #996600;
     margin-left: 20px;
   }
+
 
 
 ul {

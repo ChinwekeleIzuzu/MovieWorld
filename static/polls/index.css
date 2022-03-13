@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+  }
+  
+
+  /* Style the header */
+  .header {
+    background-image: url('static/img/logo4.jpg');
+    background-color: #7e7e7e;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: #f1f1f1;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    background-color:#ccc
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+
+  
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  @media (max-width: 600px) {
+    .column {
+      width: 100%;
+    }
+  }
+
+  img { 
+       width: 100%;
+        height: auto;
+}
+
+.list {
+    background-color: #ccc;
+}

@@ -18,7 +18,7 @@ ul {
     text-decoration: none;
   }
   
-  /* 当鼠标悬停时把链接颜色更改为 #111（黑色） */
+
   li a:hover {
     background-color: #111;
   }
