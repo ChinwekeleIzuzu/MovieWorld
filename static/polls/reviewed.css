@@ -1,0 +1,70 @@
+.drop_div{
+  margin-right:-60%;
+}
+.dropdown {
+  position: relative;
+  display: inline;
+  margin-left:50px;
+}
+.selectbtn {
+  background-color: #333;
+  font-family:verdana;
+  font-weight:400;
+  color: white;
+  padding: 16px 25px;
+  font-size: 16px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.options:hover {
+  background-color: grey;
+}
+
+.dropdown:hover options {
+  display: block;
+}
+.dropdown:hover .selectbtn {
+  background-color: black;
+}
+
+.table thead, .table tr {
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-top-color: black;
+}
+.table {
+  margin-top:20px;
+  margin-bottom:20px;
+  width:95%;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+  table-layout: fixed;
+  word-break: break-all; 
+  word-wrap: break-word; 
+}
+
+.table td, .table th  {
+  padding: 10px 16px;
+  font-size: 16px;
+  font-family: Verdana;
+  color: black;
+}
+#td_year{
+  width: 130px;
+}
+#td_lan{
+  width:100px;
+}
+#td_rating{
+  width:70px; 
+}
+#td_time{
+  width:200px; !important;
+}
+.table tr:nth-child(odd) {
+  background: #DCDCDC
+}
+.table tr:nth-child(even) {
+  background: #F5F5F5
+}

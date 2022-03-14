@@ -7,7 +7,7 @@
     <head>
         <link rel="stylesheet" href="{% static 'polls/baseStyle.css' %}">
 
-        <link href="{% static '/img/smalllogo.png' %}" rel="icon">
+        <link href="{% static '/img/logo4.jpg' %}" rel="icon">
         <title>
             MovieWorld - 
             {% block title_block %}
@@ -18,7 +18,6 @@
     <body>
         <div>
             <ul>
-                <li class="logo"><img src="{% static "img/smalllogo2.png" %}" alt="Movie World logo" /> </li>
                 <li><a href="{% url 'movieworld:index' %}">Index</a></li>
                 {% if user.is_authenticated %}
                 <li style="float:right"><a href="{% url 'movieworld:logout' %}">Logout</a></li>
@@ -48,7 +47,9 @@
         </footer>
 
       <script src='{% static 'js/jquery-3.6.0.js' %}' ></script>
-
+      <script src='{% static 'js/sign_up.js' %}' ></script>
+      <script src='{% static 'js/login.js' %}' ></script>
+      <script src='{% static 'js/select.js' %}' ></script>
     </body>
     
 </html>

@@ -6,23 +6,63 @@
 {% endblock %}
 
 {% block body_block %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'polls/reviewed.css'%}">
     <div class="header">
 	    <h2><strong>Movie World!</strong></h2> 
     </div>
 
     <div>
     <center><h2>Reviewed Movies</h2>
-		
-			
-		{% if movies %}
-			<ul>
-			{% for movie in movies %}
-				<li>
-					<p><a href="{% url 'movieworld:details' movie.movie.movie_id %}">{{ movie.movie }}</a></p>
-				</li>
+    {% csrf_token %}
+
+    <div class='drop_div'>
+        <div class='dropdown'>
+            <select class='selectbtn' id="sort" onchange="sort();">  
+                <div class='options'>
+	    <option value="">Sorted by</option> 
+	    <option value="a_z">Title A-Z</option> 
+	    <option value="z_a">Title Z-A</option> 
+                    <option value="asc">Earliest</option> 
+	    <option value="desc">Latest</option> 
+               </div>
+          </select> 
+        </div>
+
+        <div class='dropdown'>
+            <select class='selectbtn' id="select" onchange="change();">  
+                <div class='options'>
+	    <option value="">Language</option> 
+	    <option value="English">English</option> 
+	    <option value="Hindi">Hindi</option> 
+                    <option value="Chinese">Chinese</option> 
+                   <option value="Korean">Korean</option>
+                   <option value="Japenese">Japenese</option> 
+               </div>
+           </select> 
+        </div>
+     </div>
+
+     <table class='table' id='table'>
+         <tr>
+            <td>Title</td>
+            <td id='td_year'>Year</td>
+            <td>Genre</td>
+            <td id='td_lan'>Language</td>
+            <td id='td_rating'>Rating</td>
+            <td>Review</td>
+            <td id='td_time'>Datetime</td>
+        </tr>
+    </table>
+
+    <div id="tbody">
+		{% if reviews %}
+			<table>
+			{% for review in reviews %}
+				<tr>
+					<td><a href="{% url 'movieworld:details' review.movie.movie_id %}">{{ review.movie }}</a></td>
+				</tr>
 			{% endfor %}
-			</ul>
+			</table>
 		{% else %}
 			<p>There are no movie present.</p>
 		{% endif %}</center></div>

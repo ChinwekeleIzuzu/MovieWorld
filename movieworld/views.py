@@ -20,6 +20,7 @@ import json
 
 #from movieworld.models import Review, UserProfile 
 
+
 #@Author Xinyao 
 
 def index(request):	
@@ -137,11 +138,13 @@ def review(request, imdb_id):
 
 
 def movies(request):
+    user=request.session.get('user')
+    user=User.objects.get(username=user)
 
-    top5movies_list = Review.objects.order_by('-review_number')[:5]
+    reviews = Review.objects.filter(user=user)
     context_dict = {}
-    context_dict['movies'] = top5movies_list
-    
+    context_dict['reviews'] = reviews
+  
     return render(request, 'movieworld/allmovies.html', context=context_dict)
 
 #@Author Xinyao 
@@ -193,6 +196,7 @@ def login_check(request):
         if user:
             if user.is_active:
                  login(request, user)
+                 request.session['user']=username
                  return JsonResponse({'res':1})
             else:
                  return JsonResponse({'res':2})
@@ -206,4 +210,75 @@ def login_check(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('movieworld:index'))
+
+@csrf_exempt
+def reviewed_select(request):
+    user=request.session.get('user')
+    
+    try:
+        language=request.POST.get('language')
+        sort=request.POST.get('sort')
+
+    except:
+        language=None
+        sort=None
+
+    data=[]
+    x=0
+ 
+    try:
+        user=User.objects.get(username=user)
+        reviews=Review.objects.filter(user=user)
+        flag=0
+        if(language):
+            movies=Movie.objects.filter(language=language)
+            flag=1
+        
+        if sort=='a_z':
+            movies=Movie.objects.order_by('title')
+            flag=1
+             
+        if sort=='z_a' :
+            movies=Movie.objects.order_by('-title')
+            flag=1
+
+        if sort=='asc':
+                reviews=Review.objects.filter(user=user).order_by('date')
+
+        if sort=="desc":
+                reviews=Review.objects.filter(user=user).order_by('-date')
+
+        if (flag==0):
+            for j in reviews:
+                data.append([])
+                data[x].append(j.movie.title)
+                data[x].append(j.movie.year)
+                data[x].append(j.movie.genre)
+                data[x].append(j.movie.language)
+                data[x].append(j.review)
+                data[x].append(j.date.strftime('%Y-%m-%d %H:%I:%S'))
+                data[x].append(j.review_number)
+                x+=1
+     
+        if (flag==1):
+            for i in movies: 
+                reviews=Review.objects.filter(movie=i,user=user)            
+                for j in reviews:
+                    data.append([])
+                    data[x].append(j.movie.title)
+                    data[x].append(j.movie.year)
+                    data[x].append(j.movie.genre)
+                    data[x].append(j.movie.language)
+                    data[x].append(j.review)
+                    data[x].append(j.date.strftime('%Y-%m-%d %H:%I:%S'))
+                    data[x].append(j.review_number)
+                    x+=1
+       
+    except Movie.DoesNotExist:
+        data=None
+
+    context_dict = {}
+    context_dict['reviews'] = reviews
+  
+    return JsonResponse(data, safe=False)
 
