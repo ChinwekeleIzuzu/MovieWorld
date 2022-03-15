@@ -42,7 +42,7 @@
         </div>
      </div>
 
-     <table class='table' id='table'>
+     <table class='table'  id='table' >
          <tr>
             <td>Title</td>
             <td id='td_year'>Year</td>
@@ -58,9 +58,9 @@
 		{% if reviews %}
 			<table>
 			{% for review in reviews %}
-				<tr>
-					<td><a href="{% url 'movieworld:details' review.movie.movie_id %}">{{ review.movie }}</a></td>
-				</tr>
+				<ul>
+					<li><a href="{% url 'movieworld:details' review.movie.movie_id %}">{{ review.movie }}</a></li>
+				</ul>
 			{% endfor %}
 			</table>
 		{% else %}

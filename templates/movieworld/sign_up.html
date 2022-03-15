@@ -50,13 +50,10 @@
     <div class="picturelabel"> {{profile_form.picture.label}}</div> 
     <input type='file'  class='picturefile' />
   
-    <input type="submit" name="submit"  id='submit' value="Register" />
+    <input type="submit" name="submit"  id='submit_sign' class='submit' value="Register" />
 
     </form>
 </div>
 {% endif %}
-
-<script src='{% static 'js/jquery-3.6.0.js' %}' ></script>
-<script src="{% static 'js/sign_up.js' %}" crossorigin="anonymous"></script>
 
 {% endblock %}

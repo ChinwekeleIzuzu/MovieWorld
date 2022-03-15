@@ -74,7 +74,9 @@
   margin-left: 10px;
   font-size:15px;
 }
-#submit {
+
+
+.submit{
   margin-left:35%;
   margin-top:20px;
   padding: 16px 25px;
@@ -84,7 +86,8 @@
   font-size: 17px;
   font-family:verdana;
 }
-#submit:hover {
+ 
+.submit:hover {
   background-color: #666666;
   transform: translateY(-3px);
 }
