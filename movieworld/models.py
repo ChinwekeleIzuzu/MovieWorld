@@ -15,7 +15,7 @@ class UserProfile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        SIZE = 250, 250
+        SIZE = 50, 50
         
         if self.picture:
             pic = Image.open(self.picture.path)

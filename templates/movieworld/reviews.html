@@ -42,19 +42,19 @@
         <h4><b>REVIEWS:</b></h4><br>
 
         {% for review in reviews %}
-            <li>
+        
             {% if review.user.profile.picture %}
                 <img src="{{ review.user.profile.picture.url }}" alt="">
             {% else %}
                 <img src="{% static 'img/avatar2.jpeg' %}" alt="">
             {% endif %}
-
+                
                 <div>@{{ review.user.username }}</div>
                 <div>{{ review.date }}</div>
                 <div>{{ review.review_number }}/5</div>
                 <div>{{ review.review }}</div>
                 
-            </li>
+            <br/>
         {% endfor %}
     </div>
 
