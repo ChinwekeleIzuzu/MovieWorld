@@ -59,7 +59,13 @@
 			<table>
 			{% for review in reviews %}
 				<ul>
-					<li><a href="{% url 'movieworld:details' review.movie.movie_id %}">{{ review.movie }}</a></li>
+					<li><a href="{% url 'movieworld:details' review.movie.movie_id %}">{{ review.movie.title }}</a></li>
+                    <li>{{ review.movie.year }}</li>
+                    <li>{{ review.movie.genre }}</li>
+                    <li>{{ review.movie.language }}</li>
+                    <li>{{ review.review_number }}</li>
+                    <li>{{ review.review }}</li>
+                    <li>{{ review.date }}</li>
 				</ul>
 			{% endfor %}
 			</table>

@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.template import loader
 from movieworld.models import Movie, Review, UserProfile
 import requests
+from django.db.models import Avg
 from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -25,7 +26,7 @@ import json
 
 def index(request):	
     
-	top5movies_list = Movie.objects.order_by('title')[:5]
+	top5movies_list = Review.objects.order_by('review_number')[:5]
 
 	context_dict = {}
 	context_dict['movies'] = top5movies_list
@@ -59,11 +60,15 @@ def movieDetails(request, imdb_id):
     if Movie.objects.filter(movie_id=imdb_id).exists():
         movie_data = Movie.objects.get(movie_id=imdb_id)
         reviews = Review.objects.filter(movie=movie_data)
+        reviews_avg = reviews.aggregate(Avg('rate'))
+        reviews_count = reviews.count()
         database = True
 
         context = {
 			'movie_data': movie_data,
 			'reviews': reviews,
+            'reviews_avg': reviews_avg,
+			'reviews_count': reviews_count,
 			'database': database,
 		}
         
@@ -80,6 +85,7 @@ def movieDetails(request, imdb_id):
             language=movie_data['Language'],
             poster_url=movie_data['Poster'],
             plot=movie_data['Plot'],
+            totalSeasons = movie_data['totalSeasons'],
             )
 
         m.save()
@@ -136,14 +142,16 @@ def review(request, imdb_id):
 
 	return HttpResponse(template.render(context, request))
 
-
+@login_required
 def movies(request):
-    user=request.session.get('user')
-    user=User.objects.get(username=user)
+    # user=request.session.get('user')
+    # user=User.objects.get(username=user)
 
-    reviews = Review.objects.filter(user=user)
+    
+    reviews = Review.objects.order_by('review_number')
     context_dict = {}
     context_dict['reviews'] = reviews
+    
   
     return render(request, 'movieworld/allmovies.html', context=context_dict)
 

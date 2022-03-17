@@ -5,12 +5,17 @@
   display: table;
 }
 
-img {
+.card img {
     float: left;
     padding: 15px;
   }
 
 .info {
     padding: 70px 0;
+}
+
+.review img{
+  float: left;
+  padding: 15px;
 }
 
