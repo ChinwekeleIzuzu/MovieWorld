@@ -67,7 +67,7 @@ class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     review = models.TextField(max_length=3000, blank=True)
-    review_number = models.PositiveSmallIntegerField(choices=CHOICES)
+    review_number = models.PositiveSmallIntegerField(default=0, choices=CHOICES)
 
     def __str__(self):
         return self.user.username

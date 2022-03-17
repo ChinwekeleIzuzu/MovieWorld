@@ -6,9 +6,14 @@
 {% endblock %}
 
 {% block body_block %}
-    <div>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/review.css'%}">
+</head>
+
+    <div class="card">
         <img src="{{ movie.poster.url }}">
-        <div>
+        <div class="container">
             <b>{{ movie.title }}</b>
             <br>
             <p>{{ movie.plot }}</p>
@@ -19,10 +24,11 @@
             </div>
             <div>
                 {{ form.review }}
-              <label for="textarea1">Comment</label>
+                <label for="textarea1">Comment</label>
             </div>
-
             <button type="submit" name="action">Review</button>
             </form>
+        </div>
     </div>  
+
 {% endblock %}

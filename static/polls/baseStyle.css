@@ -38,3 +38,8 @@ ul {
   li a:hover {
     background-color: #111;
   }
+
+  footer{
+    display: flex;
+    flex-direction: column;
+  }

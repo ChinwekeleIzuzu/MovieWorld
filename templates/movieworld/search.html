@@ -12,11 +12,11 @@
 </head>
 
 <center><h1 class="m-5"><mark>Search for a Movie</mark></h1></center>
+<div class="search bar">
 <form>
-    <div>
         {% csrf_token %}
-        <input id="textarea1" name="title" value="{{ request.GET.title }}"  placeholder= "Title of Movie" type="text">
-    </div><br>
-    <button class="btn btn-primary" type="submit">Submit</button>
+        <input id="textarea1" name="title" value="{{ request.GET.title }}"  placeholder= "Title of Movie" type="text"><br>
+    <button class="btn btn-primary" type="submit"></button>
 </form>
+</div>
 {% endblock %}
