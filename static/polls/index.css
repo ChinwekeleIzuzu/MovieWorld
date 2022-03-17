@@ -5,12 +5,12 @@
 
   /* Style the header */
   .header {
-    background-image: url('static/img/logo4.jpg');
     background-color: #7e7e7e;
     padding: 30px;
     text-align: center;
     font-size: 35px;
     color: #f1f1f1;
+    background-image: url('static/img/logo4.jpg');
   }
   
   /* Create three equal columns that floats next to each other */
@@ -18,7 +18,7 @@
     float: left;
     width: 50%;
     padding: 10px;
-    background-color:#ccc
+    background-color:rgb(255, 255, 255)
   }
   
   /* Clear floats after the columns */
@@ -43,5 +43,5 @@
 }
 
 .list {
-    background-color: #ccc;
+    background-color: rgb(255, 255, 255);
 }

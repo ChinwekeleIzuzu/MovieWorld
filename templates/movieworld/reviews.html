@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'polls/reviews.css'%}">
 </head>
     {% if database is True %}
+    <div class="card">
         <img src="{{ movie_data.poster.url }}">
         <div class="info">
             <h1> Title: {{ movie_data.title }} </h1>
@@ -21,7 +22,9 @@
         <div>
             <a href="{% url 'movieworld:reviews' movie_data.movie_id%}">Review</a>
         </div>
+    </div>
     {% else %}
+    <div class="card">
         <img src="{{ movie_data.Poster }}">
         <div class="info">
             <h1> Title: {{ movie_data.Title }} </h1>
@@ -32,18 +35,24 @@
         <div>
             <a href="{% url 'movieworld:reviews' movie_data.imdbID%}">Review</a>
         </div>
+    </div>
     {% endif %}
 
     <div class="review">
         <h4><b>REVIEWS:</b></h4><br>
 
         {% for review in reviews %}
-            <li class="collection-item avatar">
+            <li>
+            {% if review.user.profile.picture %}
+                <img src="{{ review.user.profile.picture.url }}" alt="">
+            {% else %}
+                <img src="{% static 'img/avatar2.jpeg' %}" alt="">
+            {% endif %}
 
             {% if review.user.profile.picture %}
                 <img src="{{ review.user.profile.picture.url }}" alt="" class="circle">
             {% else %}
-                <img src="{% static '/img/avatar.jpg' %}" alt="" class="circle">
+                <img src="{% static '/img/avatar2.jpeg' %}" alt="" class="circle">
             {% endif %}
             <span class="title"><b>@{{ review.user.username }}</b></span>
             <p>@{{ review.date }}</p>

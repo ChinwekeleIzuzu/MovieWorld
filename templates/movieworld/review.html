@@ -7,44 +7,13 @@
 
 {% block body_block %}
 
-<div class="col s12 m12">
-    <div class="card horizontal">
-      <div class="card-image">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/review.css'%}">
+</head>
+
+    <div class="card">
         <img src="{{ movie.poster.url }}">
-      </div>
-      <div class="card-stacked">
-        <div class="card-content">
-          <span class="card-title"><b>{{  movie.title }}</b></span>
-          <span>{{ movie.year }}</span>
-          <br>
-          <p>{{ movie.plot }}</p>
-          <br>
-          <div class="divider"></div>
-          <br>
-        </div>
-      </div>
-    </div>
-</div>
-
-<div>
-    <form method="post" action="" role="form" >
-        {% csrf_token %}
-    
-    <div>
-        {{ form.review_number }}
-      <label for="textarea1">Comment</label>
-    </div>
-
-    <div class="input-field col s12">
-        
-    </div>
-
-    <button type="submit" name="action">Review</button>
-    </form>
-</div>  
-    <!-- <div>
-        <img src="{{ movie.poster.url }}">
-        <div>
+        <div class="container">
             <b>{{ movie.title }}</b>
             <br>
             <p>{{ movie.plot }}</p>
@@ -55,10 +24,11 @@
             </div>
             <div>
                 {{ form.review }}
-              <label for="textarea1">Comment</label>
+                <label for="textarea1">Comment</label>
             </div>
-
             <button type="submit" name="action">Review</button>
             </form>
-    </div>   -->
+        </div>
+    </div>  
+
 {% endblock %}

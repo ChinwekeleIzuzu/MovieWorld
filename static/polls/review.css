@@ -1,4 +1,23 @@
+
+.card::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 img {
-    float: left;
-    padding: 15px;
-  }
+  margin-left: 50px;
+  margin-top: 70px;
+  margin-right: 150px;
+  float: left;
+}
+
+.container{
+  padding-top: 170px;
+  margin-right: 150px;
+}
+
+div b{
+  margin-bottom: 50px;
+}
+

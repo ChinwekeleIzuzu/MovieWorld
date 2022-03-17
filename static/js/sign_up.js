@@ -1,4 +1,4 @@
-$('#submit').click(function() {
+$('#submit_sign').click(function() {
 
     //set i to check if meet all the conditions 
     var i=0   

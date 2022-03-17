@@ -5,8 +5,9 @@
 
 <html>
     <head>
-        <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/> -->
+        <link rel="stylesheet" href="{% static 'polls/baseStyle.css' %}">
+
+        <link href="{% static '/img/smalllogo.png' %}" rel="icon">
         <title>
 
             MovieWorld - 
@@ -14,17 +15,14 @@
 
             {% endblock %}
         </title>
-        <link href="{% static 'polls/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-        <!-- <link href="{% static 'polls/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/> -->
-
+        
         <link rel="stylesheet" href="{% static 'polls/baseStyle.css' %}">
         <link href="{% static 'img/logo4.jpg' %}" rel="icon">
     </head>
     <body>
         <div>
             <ul>
+                <li class="logo"><img src="{% static "img/smalllogo2.png" %}" alt="Movie World logo" /> </li>
                 <li><a href="{% url 'movieworld:index' %}">Index</a></li>
                 {% if user.is_authenticated %}
                 <li style="float:right"><a href="{% url 'movieworld:logout' %}">Logout</a></li>
