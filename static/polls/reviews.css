@@ -5,7 +5,7 @@
   display: table;
 }
 
-img {
+.card img {
     float: left;
     padding: 15px;
   }
@@ -14,4 +14,8 @@ img {
     padding: 70px 0;
 }
 
-  
+.review img{
+  float: left;
+  padding: 15px;
+}
+
