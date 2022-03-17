@@ -4,7 +4,7 @@ form {
 }
 
 body {
-    background-image: url('../static/img/movies.jpg');
+    background-image: url('./static/img/movies.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

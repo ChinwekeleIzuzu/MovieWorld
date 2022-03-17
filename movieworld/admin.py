@@ -5,7 +5,7 @@ from movieworld.models import UserProfile, Movie, Review
 # Register your models here.
 
 class ReviewAdmin(admin.ModelAdmin):
-	list_display=('review','user','date')
+	list_display=('review', 'user', 'date')
 
 
 admin.site.register(Review, ReviewAdmin)

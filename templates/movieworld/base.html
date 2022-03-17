@@ -5,15 +5,22 @@
 
 <html>
     <head>
-        <link rel="stylesheet" href="{% static 'polls/baseStyle.css' %}">
-
-        <link href="{% static '/img/logo4.jpg' %}" rel="icon">
+        <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/> -->
         <title>
+
             MovieWorld - 
             {% block title_block %}
 
             {% endblock %}
         </title>
+        <link href="{% static 'polls/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+        <!-- <link href="{% static 'polls/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+
+        <link rel="stylesheet" href="{% static 'polls/baseStyle.css' %}">
+        <link href="{% static 'img/logo4.jpg' %}" rel="icon">
     </head>
     <body>
         <div>
@@ -30,21 +37,17 @@
                 <li style="float:right"><a href="{% url 'movieworld:about' %}">About</a ></li>
             </ul>
         </div>
-        <div>
+        <div class = "container">
+            <div class="section">
             {% block body_block %}
-                
             {% endblock %}
+            </div>
         </div>
+
         <div>
             {% block side_block %}
-            
             {% endblock %}
         </div>
-        <hr />
-
-        <footer class="footer">
-            Group One ITECH Project
-        </footer>
 
       <script src='{% static 'js/jquery-3.6.0.js' %}' ></script>
       <script src='{% static 'js/sign_up.js' %}' ></script>
