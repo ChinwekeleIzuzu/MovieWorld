@@ -142,19 +142,6 @@ def review(request, imdb_id):
 
 	return HttpResponse(template.render(context, request))
 
-@login_required
-def movies(request):
-    # user=request.session.get('user')
-    # user=User.objects.get(username=user)
-
-    
-    reviews = Review.objects.order_by('review_number')
-    context_dict = {}
-    context_dict['reviews'] = reviews
-    
-  
-    return render(request, 'movieworld/allmovies.html', context=context_dict)
-
 #@Author Xinyao 
 def about(request):
 	context_dict = {}
@@ -219,27 +206,36 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('movieworld:index'))
 
+
 @csrf_exempt
 def reviewed_select(request):
+
+//get the username from the session
     user=request.session.get('user')
     
     try:
         language=request.POST.get('language')
         sort=request.POST.get('sort')
+        genre=request.POST.get('genre')
 
     except:
         language=None
         sort=None
+        genre=None
 
-    data=[]
-    x=0
- 
     try:
         user=User.objects.get(username=user)
         reviews=Review.objects.filter(user=user)
+
+//set a flag to check if get data from review model or movie model
         flag=0
+
         if(language):
-            movies=Movie.objects.filter(language=language)
+            movies=Movie.objects.filter(language__contains=language)
+            flag=1
+
+        if(genre):
+            movies=Movie.objects.filter(genre__contains=genre)
             flag=1
         
         if sort=='a_z':
@@ -256,6 +252,11 @@ def reviewed_select(request):
         if sort=="desc":
                 reviews=Review.objects.filter(user=user).order_by('-date')
 
+// make a list to save the data
+       data=[]
+       x=0    
+
+//when select data from review model
         if (flag==0):
             for j in reviews:
                 data.append([])
@@ -267,7 +268,8 @@ def reviewed_select(request):
                 data[x].append(j.date.strftime('%Y-%m-%d %H:%I:%S'))
                 data[x].append(j.review_number)
                 x+=1
-     
+
+//when select data from movie model     
         if (flag==1):
             for i in movies: 
                 reviews=Review.objects.filter(movie=i,user=user)            
@@ -285,8 +287,84 @@ def reviewed_select(request):
     except Movie.DoesNotExist:
         data=None
 
-    context_dict = {}
-    context_dict['reviews'] = reviews
-  
     return JsonResponse(data, safe=False)
 
+@login_required
+def my_reviews(request):
+
+//get username from session
+    user=request.session.get('user')
+    user=User.objects.get(username=user)
+
+//get all reviews from this user
+    reviews = Review.objects.filter(user=user)
+    context_dict = {}
+    context_dict['reviews'] = reviews
+
+    return render(request, 'movieworld/my_reviews.html', context=context_dict)
+
+@login_required
+@csrf_exempt
+def movies_select(request):
+
+//clear the session
+    request.session['language']=None
+    request.session['genre']=None
+
+//get the two variables from dropdown
+    try:
+        language=request.POST.get('language')
+        genre=request.POST.get('genre')
+
+    except:
+        language=None
+        genre=None
+
+//save the two options into session
+    request.session['language']=language
+    request.session['genre']=genre
+    
+    return JsonResponse({'res':1})
+
+@login_required
+def reviews_all(request):   
+
+//get the option from session
+    try:
+        language=request.session.get('language')
+        genre=request.session.get('genre')
+        print(language)
+    except:
+        language=None
+        genre=None
+
+//get all movies 
+    movies = Movie.objects.all()
+
+//filter the movies if the option exists
+    if language:
+        movies=Movie.objects.filter(language__contains=language)
+        request.session['language']=None
+
+    if genre:
+        movies=Movie.objects.filter(genre__contains=genre)
+        request.session['genre']=None
+
+//get the movie from review model with no duplicate values
+    reviews=Review.objects.values('movie').distinct()
+
+//return the movies and reviews
+    context_dict={}
+    context_dict['movies']=movies
+    context_dict['reviews']=reviews
+
+//make a flag to check if there is data meets the requirements 
+    context_dict['flag']=0
+
+//set the flag 1, when there is data    
+    for m in movies:
+        for r in reviews:
+            if m.id==r['movie']:
+                 context_dict['flag']=1               
+
+    return render(request, 'movieworld/reviews_all.html', context=context_dict)
