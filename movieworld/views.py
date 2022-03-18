@@ -60,15 +60,11 @@ def movieDetails(request, imdb_id):
     if Movie.objects.filter(movie_id=imdb_id).exists():
         movie_data = Movie.objects.get(movie_id=imdb_id)
         reviews = Review.objects.filter(movie=movie_data)
-        reviews_avg = reviews.aggregate(Avg('rate'))
-        reviews_count = reviews.count()
         database = True
 
         context = {
 			'movie_data': movie_data,
 			'reviews': reviews,
-            'reviews_avg': reviews_avg,
-			'reviews_count': reviews_count,
 			'database': database,
 		}
         
@@ -85,7 +81,6 @@ def movieDetails(request, imdb_id):
             language=movie_data['Language'],
             poster_url=movie_data['Poster'],
             plot=movie_data['Plot'],
-            totalSeasons = movie_data['totalSeasons'],
             )
 
         m.save()
@@ -206,11 +201,10 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('movieworld:index'))
 
-
 @csrf_exempt
 def reviewed_select(request):
 
-//get the username from the session
+#get the username from the session
     user=request.session.get('user')
     
     try:
@@ -227,7 +221,7 @@ def reviewed_select(request):
         user=User.objects.get(username=user)
         reviews=Review.objects.filter(user=user)
 
-//set a flag to check if get data from review model or movie model
+#set a flag to check if get data from review model or movie model
         flag=0
 
         if(language):
@@ -252,11 +246,11 @@ def reviewed_select(request):
         if sort=="desc":
                 reviews=Review.objects.filter(user=user).order_by('-date')
 
-// make a list to save the data
-       data=[]
-       x=0    
+# make a list to save the data
+        data=[]
+        x=0    
 
-//when select data from review model
+#when select data from review model
         if (flag==0):
             for j in reviews:
                 data.append([])
@@ -269,7 +263,7 @@ def reviewed_select(request):
                 data[x].append(j.review_number)
                 x+=1
 
-//when select data from movie model     
+#when select data from movie model     
         if (flag==1):
             for i in movies: 
                 reviews=Review.objects.filter(movie=i,user=user)            
@@ -292,11 +286,11 @@ def reviewed_select(request):
 @login_required
 def my_reviews(request):
 
-//get username from session
+#get username from session
     user=request.session.get('user')
     user=User.objects.get(username=user)
 
-//get all reviews from this user
+#get all reviews from this user
     reviews = Review.objects.filter(user=user)
     context_dict = {}
     context_dict['reviews'] = reviews
@@ -307,11 +301,11 @@ def my_reviews(request):
 @csrf_exempt
 def movies_select(request):
 
-//clear the session
+#clear the session
     request.session['language']=None
     request.session['genre']=None
 
-//get the two variables from dropdown
+#get the two variables from dropdown
     try:
         language=request.POST.get('language')
         genre=request.POST.get('genre')
@@ -320,7 +314,7 @@ def movies_select(request):
         language=None
         genre=None
 
-//save the two options into session
+#save the two options into session
     request.session['language']=language
     request.session['genre']=genre
     
@@ -329,7 +323,7 @@ def movies_select(request):
 @login_required
 def reviews_all(request):   
 
-//get the option from session
+#get the option from session
     try:
         language=request.session.get('language')
         genre=request.session.get('genre')
@@ -338,10 +332,10 @@ def reviews_all(request):
         language=None
         genre=None
 
-//get all movies 
+#get all movies 
     movies = Movie.objects.all()
 
-//filter the movies if the option exists
+#filter the movies if the option exists
     if language:
         movies=Movie.objects.filter(language__contains=language)
         request.session['language']=None
@@ -350,18 +344,18 @@ def reviews_all(request):
         movies=Movie.objects.filter(genre__contains=genre)
         request.session['genre']=None
 
-//get the movie from review model with no duplicate values
+#get the movie from review model with no duplicate values
     reviews=Review.objects.values('movie').distinct()
 
-//return the movies and reviews
+#return the movies and reviews
     context_dict={}
     context_dict['movies']=movies
     context_dict['reviews']=reviews
 
-//make a flag to check if there is data meets the requirements 
+#make a flag to check if there is data meets the requirements 
     context_dict['flag']=0
 
-//set the flag 1, when there is data    
+#set the flag 1, when there is data    
     for m in movies:
         for r in reviews:
             if m.id==r['movie']:
