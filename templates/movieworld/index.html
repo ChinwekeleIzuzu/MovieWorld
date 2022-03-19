@@ -12,16 +12,16 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'polls/index.css' %}">
 </head>
 
-<div class="header">
+<div class="header" style="background-image:url('../static/img/movies.jpg');">
 	<h2><strong>Welcome to Movie World!</strong></h2> 
   </div>
   
   <div class="row">
 	<div class="column" >
-		<center><h2>Movie of the Week<br></h2>
+		<center><h2>PICK OF THE WEEK<br></h2>
 			Harry Potter and the Philosopher's Stone(2001)</center></div>
 	<div class="column" >
-		<center><h2>Top 5 Movies</h2>
+		<center><h2>TOP 5 FILMS</h2>
 		
 		{% if movies %}
 			<ul class="list">
@@ -29,7 +29,7 @@
 				{%for movie in movies%}
 			
 				{% if movie.id == review.movie %}
-					<p>{{movie.title}} {{review.avg}}</p>	
+					<p><b>{{movie.title}}</b></p>
 				{% endif %}
 
 				{%endfor%}				

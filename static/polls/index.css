@@ -20,8 +20,10 @@
   .column {
     float: left;
     width: 50%;
-    padding: 10px;
-    background-color:rgb(255, 255, 255)
+    padding: 20px;
+    background-color:rgb(255, 255, 255);
+    font-style: italic;
+    
   }
   
   /* Clear floats after the columns */
