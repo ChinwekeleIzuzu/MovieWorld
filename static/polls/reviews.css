@@ -6,12 +6,15 @@
 }
 
 .card img {
-    float: left;
-    padding: 15px;
-  }
+  margin-left: 150px;
+  margin-top: 50px;
+  margin-right: 100px;
+  float: left;
+}
 
 .info {
-    padding: 70px 0;
+  padding: 70px 0;
+  font-size:18px;
 }
 
 .review img{
@@ -19,3 +22,83 @@
   padding: 15px;
 }
 
+.make-btn {
+  undefined
+  font-size:18px;
+  font-weight:500px;
+  font-family:Verdana;
+  text-decoration: none;
+  background-color: #333;
+  color: white;
+  width:20px;
+  padding: 4px 6px 4px 6px;
+  border-top: 10px solid #333;
+  border-right: 10px solid #333;
+  border-bottom: 10px solid #333;
+  border-left: 10px solid #333;  
+  border-radius:10px;
+}
+
+.make-btn:hover {
+  background-color: black;
+  border-top: 11px solid black;
+  border-right: 10px solid black;
+  border-bottom: 9px solid black;
+  border-left: 10px solid black;  
+}
+
+.hr {
+    margin-top:30px;
+    border: 0;
+    padding: 3px;
+    background: repeating-linear-gradient(135deg, black 0px, black 1px, transparent 1px, transparent 6px);
+}
+
+.reviews{
+  margin-left:100px;
+}
+
+.reviews-header{
+  font-size:25px;  
+  margin-bottom:-5px;
+}
+
+.ul_white{
+  color:white;
+  font-size:15px;
+  font-weight:500;
+  font-family:verdana;
+  background-color: #333;
+  border-radius:10px;
+  width:95%;
+}
+.li_pic{
+  margin-left:30px;
+  margin-top:10px;
+}
+.li{
+  margin-left:30px;
+  margin-top:20px;
+}
+
+.ul_reviews{
+  color:white;
+  font-size:15px;
+  font-weight:500;
+  background-color: #333;
+  border-radius:10px;
+  width:95%;
+  matgin-top:10px;
+}
+
+.li_reviews{
+  margin-left:100px;
+  margin-bottom:5px;
+}
+
+body {
+  background-image: url('../img/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}

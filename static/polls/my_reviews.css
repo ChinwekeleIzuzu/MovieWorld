@@ -1,10 +1,11 @@
 .drop_div{
   margin-right:-60%;
+  margin-botton:30px;
 }
 .dropdown {
   position: relative;
   display: inline;
-  margin-left:50px;
+  margin-left:30px;
 }
 .selectbtn {
   background-color: #333;
@@ -67,4 +68,8 @@
 }
 .table tr:nth-child(even) {
   background: #F5F5F5
+}
+
+#tbody{
+margin-top:20px;
 }

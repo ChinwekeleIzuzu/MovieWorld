@@ -1,16 +1,11 @@
 head{
-    color: #996600;
+  color: #3a2700;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: #3a2700;
-    background-color: #ffffff;
-  }
-  
-h1 {
-    color: #996600;
-    margin-left: 20px;
+    background: #ebe7e7;
   }
 
 
@@ -20,7 +15,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(0, 0, 0);
   }
   
   li {
@@ -39,7 +34,11 @@ ul {
     background-color: #111;
   }
 
-  footer{
-    display: flex;
-    flex-direction: column;
+  footer.footer-page{
+    background-color: rgb(187, 178, 178);
+    text-align: center;
+    padding: 14px 16px;
+    font-style: italic;
+    color: #282b1be1;
   }
+

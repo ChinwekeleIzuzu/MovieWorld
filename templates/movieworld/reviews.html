@@ -15,12 +15,12 @@
         <img src="{{ movie_data.poster.url }}">
         <div class="info">
             <h1> Title: {{ movie_data.title }} </h1>
-            <h5> Year: {{  movie_data.year }} </h5>
-            <h5> Language: {{ movie_data.language }} </h5>
-            <p>Genre:<b>{{ movie_data.genre }}</b></p>
+            <p><b> Year: {{  movie_data.year }} </b></p>
+            <p><b> Language: {{ movie_data.language }} </b></p>
+            <p><b>Genre:{{ movie_data.genre }}</b></p>
         </div>
         <div>
-            <a href="{% url 'movieworld:reviews' movie_data.movie_id%}">Review</a>
+            <a class='make-btn' href="{% url 'movieworld:reviews' movie_data.movie_id%}">Make your Review</a>
         </div>
     </div>
     {% else %}
@@ -28,38 +28,36 @@
         <img src="{{ movie_data.Poster }}">
         <div class="info">
             <h1> Title: {{ movie_data.Title }} </h1>
-            <h5> Year: {{  movie_data.Year }} </h5>
-            <h5> Language: {{ movie_data.Language }} </h5>
-            <p>Genre: <b>{{ movie_data.Genre }} </b></p>
+            <p><b> Year: {{  movie_data.Year }} </b></p>
+            <p><b> Language: {{ movie_data.Language }} </b></p>
+            <p><b>Genre: {{ movie_data.Genre }} </b></p>
         </div>
         <div>
-            <a href="{% url 'movieworld:reviews' movie_data.imdbID%}">Review</a>
+            <a class='make-btn' href="{% url 'movieworld:reviews' movie_data.imdbID%}">Make your Review</a>
         </div>
     </div>
     {% endif %}
 
-    <div class="review">
-        <h4><b>REVIEWS:</b></h4><br>
+    <hr class='hr'>
+
+    <div class="reviews" >
+        <h4  class='reviews-header'><b>REVIEWS:</b></h4><br>
 
         {% for review in reviews %}
-            <li>
+         <ul class='ul_white'>
+            <li class='li_pic'>
             {% if review.user.profile.picture %}
                 <img src="{{ review.user.profile.picture.url }}" alt="">
             {% else %}
                 <img src="{% static 'img/avatar2.jpeg' %}" alt="">
             {% endif %}
-
-            {% if review.user.profile.picture %}
-                <img src="{{ review.user.profile.picture.url }}" alt="" class="circle">
-            {% else %}
-                <img src="{% static '/img/avatar2.jpeg' %}" alt="" class="circle">
-            {% endif %}
-            <span class="title"><b>@{{ review.user.username }}</b></span>
-            <p>@{{ review.date }}</p>
-            <p>{{ review.date }}</p>
-            <p></p>
-            <p class="secondary-content">{{ review.review_number }}/5</p>
-          </li>
+                </li>
+                <li class='li'>@{{ review.user.username }}</li>
+                <li class='li'>{{ review.date }}</li>
+                <li class='li'>{{ review.review_number }}/5</li>
+            </ul>
+            <ul class='ul_reviews'><li class='li_reviews'> {{ review.review }}</li> </ul>
+            <br/>
         {% endfor %}
     </div>
 

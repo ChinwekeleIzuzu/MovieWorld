@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from movieworld.models import Review, CHOICES
 
-#@Author Tang 
+ 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
@@ -11,7 +11,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password',)
         
-#@Author Tang 
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile

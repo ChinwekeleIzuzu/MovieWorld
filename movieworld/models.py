@@ -6,16 +6,24 @@ from django.core import files
 import requests
 from io import BytesIO
 from PIL import Image
+from django.conf import settings
+import os
 
-# Create your models here.
+def user_directory_path(instance, filename):
+	profile_pic_name = 'user_{0}/profile.jpg'.format(instance.user.id)
+	full_path = os.path.join(settings.MEDIA_ROOT, profile_pic_name)
+
+	if os.path.exists(full_path):
+		os.remove(full_path)
+	return profile_pic_name
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    picture = models.ImageField(upload_to = 'profile_images', blank=True)
+    picture = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        SIZE = 50, 50
+        SIZE = 250, 250
         
         if self.picture:
             pic = Image.open(self.picture.path)
@@ -66,7 +74,7 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     review = models.TextField(max_length=3000, blank=True)
-    date = models.DateField(auto_now=True)
+    date = models.DateTimeField(auto_now_add=True)
     review_number = models.PositiveSmallIntegerField(default=0, choices=CHOICES)
 
     def __str__(self):

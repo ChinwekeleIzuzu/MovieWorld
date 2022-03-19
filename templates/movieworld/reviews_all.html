@@ -1,0 +1,77 @@
+{% extends 'movieworld/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Movies
+{% endblock %}
+
+{% block body_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/my_reviews.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'polls/reviews_all.css'%}">
+    <div class="header">
+	    <h2><strong>Movie World!</strong></h2> 
+    </div>
+
+    <div>
+    <center><h2>Reviewed Movies</h2>
+    {% csrf_token %}
+
+    <div class='drop_div'>
+       <div class='dropdown'>
+            <select class='selectbtn' id="select_genre" onchange="select_genre();">  
+                <div class='options'>
+	    <option value="">Genre</option> 
+	    <option value="Action">Action</option> 
+	    <option value="Thriller">Thriller</option> 
+                    <option value="Crime">Crime</option> 
+                   <option value="Comedy">Comedy</option>
+                   <option value="Adventure">Adventure</option> 
+                   <option value="Fiction">Fiction</option>
+                   <option value="Mystery">Mystery</option> 
+               </div>
+           </select> 
+        </div>
+
+        <div class='dropdown'>
+            <select class='selectbtn' id="select_lan" onchange="select_lan();">  
+                <div class='options'>
+	    <option value="">Language</option> 
+	    <option value="English">English</option> 
+	    <option value="Hindi">Hindi</option> 
+                    <option value="Chinese">Chinese</option> 
+                    <option value="Korean">Korean</option>
+                   <option value="Japenese">Japenese</option> 
+                   <option value="Latin">Latin</option>
+                   <option value="French">French</option> 
+               </div>
+           </select> 
+        </div>
+     </div>
+
+    <div id="tbody">
+	{% if reviews %}
+
+		<table>
+		{% for review in reviews %}
+            {%for movie in movies%}
+                {% if review.movie == movie.id %}
+
+                                <ul class='ul'>
+                                    <li><a href="{% url 'movieworld:details' movie.movie_id %}">{{ movie.title }}</a></li>
+                                    <li class='li'>{{ movie.language }}</li>
+                                    <li class='li'>{{ movie.genre }}</li>
+                                    <li class='li'>{{ movie.year }}</li> 
+                                </ul>
+
+                            {% endif%}
+                    {% endfor %}
+		{% endfor %}
+		</table>
+
+		{% if flag == 0 %}
+		<p>There are no movie present.</p>
+                                {%  endif %}
+	{% endif %}</center></div>
+  </div>	
+
+{% endblock %}

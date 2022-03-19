@@ -5,6 +5,11 @@
 
 <html>
     <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv = "X-UA-Compatible" content = "ie=edge">
+        
         <link rel="stylesheet" href="{% static 'polls/baseStyle.css' %}">
 
         <link href="{% static '/img/smalllogo.png' %}" rel="icon">
@@ -26,7 +31,8 @@
                 <li><a href="{% url 'movieworld:index' %}">Index</a></li>
                 {% if user.is_authenticated %}
                 <li style="float:right"><a href="{% url 'movieworld:logout' %}">Logout</a></li>
-                <li style="float:right"><a href="{% url 'movieworld:movies' %}">Reviews</a></li>
+                <li style="float:right"><a href="{% url 'movieworld:my_reviews' %}">My Reviews</a></li>
+                <li style="float:left"><a href="{% url 'movieworld:reviews_all' %}">Reviews</a></li>
                 <li><a href="{% url 'movieworld:search' %}">Search Your Movie</a ></li>
                 {% else %}
                 <li style="float:right"><a href="{% url 'movieworld:sign_up' %}">Sign Up</a></li>
@@ -35,22 +41,26 @@
                 <li style="float:right"><a href="{% url 'movieworld:about' %}">About</a ></li>
             </ul>
         </div>
-        <div class = "container">
-            <div class="section">
+
             {% block body_block %}
             {% endblock %}
-            </div>
-        </div>
+        
 
         <div>
             {% block side_block %}
             {% endblock %}
         </div>
 
+        <hr />
+        <footer class="footer-page">
+            <b>GROUP ONE ITECH PROJECT</b> 
+        </footer>
+
       <script src='{% static 'js/jquery-3.6.0.js' %}' ></script>
       <script src='{% static 'js/sign_up.js' %}' ></script>
       <script src='{% static 'js/login.js' %}' ></script>
-      <script src='{% static 'js/select.js' %}' ></script>
+      <script src='{% static 'js/my_reviews.js' %}' ></script>
+      <script src='{% static 'js/reviews_all.js' %}' ></script>
     </body>
     
 </html>

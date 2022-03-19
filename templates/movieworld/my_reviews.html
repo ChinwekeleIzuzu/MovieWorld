@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/reviewed.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'polls/my_reviews.css'%}">
     <div class="header">
 	    <h2><strong>Movie World!</strong></h2> 
     </div>
@@ -28,8 +28,23 @@
           </select> 
         </div>
 
+  <div class='dropdown'>
+            <select class='selectbtn' id="genre" onchange="genre();">  
+                <div class='options'>
+	    <option value="">Genre</option> 
+	    <option value="Action">Action</option> 
+	    <option value="Thriller">Thriller</option> 
+                    <option value="Crime">Crime</option> 
+                   <option value="Comedy">Comedy</option>
+                   <option value="Adventure">Adventure</option> 
+                   <option value="Fiction">Fiction</option>
+                   <option value="Mystery">Mystery</option> 
+               </div>
+           </select> 
+        </div>
+
         <div class='dropdown'>
-            <select class='selectbtn' id="select" onchange="change();">  
+            <select class='selectbtn' id="language" onchange="language();">  
                 <div class='options'>
 	    <option value="">Language</option> 
 	    <option value="English">English</option> 
@@ -37,6 +52,8 @@
                     <option value="Chinese">Chinese</option> 
                    <option value="Korean">Korean</option>
                    <option value="Japenese">Japenese</option> 
+                   <option value="Latin">Latin</option>
+                   <option value="French">French</option> 
                </div>
            </select> 
         </div>
@@ -53,25 +70,5 @@
             <td id='td_time'>Datetime</td>
         </tr>
     </table>
-
-    <div id="tbody">
-		{% if reviews %}
-			<table>
-			{% for review in reviews %}
-				<ul>
-					<li><a href="{% url 'movieworld:details' review.movie.movie_id %}">{{ review.movie.title }}</a></li>
-                    <li>{{ review.movie.year }}</li>
-                    <li>{{ review.movie.genre }}</li>
-                    <li>{{ review.movie.language }}</li>
-                    <li>{{ review.review_number }}</li>
-                    <li>{{ review.review }}</li>
-                    <li>{{ review.date }}</li>
-				</ul>
-			{% endfor %}
-			</table>
-		{% else %}
-			<p>There are no movie present.</p>
-		{% endif %}</center></div>
-  </div>	
 
 {% endblock %}
