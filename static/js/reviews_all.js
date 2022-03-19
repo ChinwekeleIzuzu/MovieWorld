@@ -1,4 +1,4 @@
-
+//select language
 function select_lan(){
     var select = document.getElementById("select_lan");
     var option= select.options[select.selectedIndex].value;
@@ -13,6 +13,7 @@ function select_lan(){
     });
 }
 
+//select genre
 function select_genre(){
     var select = document.getElementById("select_genre");
     var option= select.options[select.selectedIndex].value;
