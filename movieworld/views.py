@@ -15,11 +15,14 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):	
-    
-	top5movies_list = Review.objects.order_by('movie')[:5]
 
-	context_dict = {}
-	context_dict['movies'] = top5movies_list
+	movies=Movie.objects.all()
+	reviews= Review.objects.all().values('movie').annotate(avg=Avg('review_number')).values('movie','avg').order_by('-avg')[:5]
+
+	context_dict={}
+	context_dict['movies'] = movies
+	context_dict['reviews'] = reviews
+	print(context_dict)
 	
 	response = render(request, 'movieworld/index.html', context=context_dict)
 	return response
