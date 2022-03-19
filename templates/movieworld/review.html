@@ -14,12 +14,12 @@
     <div class="card">
         <img src="{{ movie.poster.url }}">
         <div class="container">
-            <b>{{ movie.title }}</b>
+            <label class='title'>{{ movie.title }}</label>
             <br>
-            <p>{{ movie.plot }}</p>
+            <i class='plot'>{{ movie.plot }}</i>
             <form method="post" action="" role="form" >
                 {% csrf_token %}
-            <div>
+            <div class='number'>
                 {{ form.review_number }}
             </div>
             <br>
@@ -27,7 +27,7 @@
                 {{ form.review }}
                 <label for="textarea1">Comment</label>
             </div>
-            <button type="submit" name="action">Review</button>
+            <button type="submit" name="action" class='re-btn'>Review</button>
             </form>
         </div>
     </div>  
