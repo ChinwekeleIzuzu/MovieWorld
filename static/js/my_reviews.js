@@ -1,4 +1,4 @@
-
+// get all the results
 $.ajax({
     url: '/movieworld/reviewed_select/',	
     type:'POST',
@@ -7,6 +7,7 @@ $.ajax({
     }
 }); 
 
+//sort in four ways
 function sort(){
     var sort = document.getElementById("sort");
     var option= sort.options[sort.selectedIndex].value;
@@ -21,6 +22,7 @@ function sort(){
     }); 
 }
 
+//select genre
 function genre(){
     var genre = document.getElementById("genre");
     var option= genre.options[genre.selectedIndex].value;
@@ -35,6 +37,7 @@ function genre(){
     }); 
 }
 
+//select language
 function language(){
     var language = document.getElementById("language");
     var option= language.options[language.selectedIndex].value;
@@ -49,7 +52,7 @@ function language(){
     });
 } 
 
-
+//show the results into table
 function render(result){
      $('#table').empty();
 
