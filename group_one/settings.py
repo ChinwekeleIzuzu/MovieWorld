@@ -28,7 +28,7 @@ SECRET_KEY = '-b*65uk+y(2+jfd!*7dcdfo(ruc_ko(#vr%nh2&$y-m!87=wc('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['movieworld.eu.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
