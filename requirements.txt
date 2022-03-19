@@ -1,0 +1,10 @@
+certifi==2021.10.8
+charset-normalizer==2.0.12
+Django==2.1.5
+idna==3.3
+olefile==0.46
+Pillow==8.4.0
+pytz==2021.3
+requests==2.27.1
+urllib3==1.26.8
+wincertstore==0.2

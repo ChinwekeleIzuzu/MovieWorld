@@ -13,15 +13,12 @@ def populate():
     catch = [
         {'review':'Greatest Movie ever Made, might have plowed off in the middle',
         'date':'2022-03-15', 'review_number': 3},
-        {'review':'Excitable Movie for sure, but terrible acting',
-        'date':'2022-02-11', 'review_number': 2},
+
         ]
 
     pulp = [
         {'review':'Incredible',
         'date':'2022-03-15', 'review_number': 3},
-        {'review':'Really Reccomend fam!',
-        'date':'2022-03-15', 'review_number': 5},
         {'review':'Samuel L Jackson is da boss!',
         'date':'2022-03-15', 'review_number': 4} ]
 
@@ -33,15 +30,12 @@ def populate():
     batman = [
         {'review':'Best Batman ever',
         'date':'2022-03-15', 'review_number': 4},
-        {'review':'Christopher Nolan is truly ahead of his time',
-        'date':'2022-07-15', 'review_number': 3},
          ]
 
     harry = [
         {'review':'Harry Porter is the greatest Movie ever made!',
         'date':'2021-11-05', 'review_number': 5},
-        {'review':'How do you not love Harry?',
-        'date':'2022-03-15', 'review_number': 4} ]
+         ]
 
     movies = {'tt0110912': {'reviews': pulp, 'title': 'Pulp Fiction', 'year': '1994', 'genre': 'Action, Triller, Suspense', 'language': 'English, Spanish, French', 'poster_url': 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg','plot': 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.'},
             'tt0119094': {'reviews': faceoff, 'title': 'Face/Off', 'year': '1997', 'genre': 'Action, Crime, Sci-Fi', 'language': 'English, Latin', 'poster_url': 'https://m.media-amazon.com/images/M/MV5BYzFjNzIxMmEtMzY5NS00YTgzLTkwYWEtN2FjMmY0NmNkZWY3XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg', 'plot': 'To foil a terrorist plot, an FBI agent undergoes facial transplant surgery to assume the identity of the criminal mastermind who murdered his only son, but the criminal wakes up prematurely and seeks revenge.'},
