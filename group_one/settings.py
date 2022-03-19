@@ -129,4 +129,6 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/static/'
 
+STATIC_ROOT = 'home/movieworld/MovieWorld/static'
+
 LOGIN_URL = '/movieworld/login/'
