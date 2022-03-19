@@ -1,29 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.text import slugify
-from django.urls import reverse
 from django.core import files
 import requests
 from io import BytesIO
 from PIL import Image
-from django.conf import settings
-import os
-
-def user_directory_path(instance, filename):
-	profile_pic_name = 'user_{0}/profile.jpg'.format(instance.user.id)
-	full_path = os.path.join(settings.MEDIA_ROOT, profile_pic_name)
-
-	if os.path.exists(full_path):
-		os.remove(full_path)
-	return profile_pic_name
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    picture = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
+    picture = models.ImageField(upload_to = 'profile_images', blank=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        SIZE = 250, 250
+        SIZE = 50, 50
         
         if self.picture:
             pic = Image.open(self.picture.path)

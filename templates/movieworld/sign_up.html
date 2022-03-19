@@ -11,7 +11,8 @@
 </head>
 
 {% if registered %}
-    <strong>Thanks for registering!</strong>
+    <strong>Welcome to Movieworld!</strong>
+    
     <a href="{% url 'movieworld:index' %}">Return to the homepage.</a><br />
 
 {% else %}
@@ -46,9 +47,8 @@
         <p id='thirdline'> 1 uppercase letter </p>
         <p id="fourthline"> 1 number </p>
     </div>
-
-    <div class="picturelabel"> {{profile_form.picture.label}}</div> 
-    <input type='file'  class='picturefile' />
+    {% csrf_token %}
+    <div class="picturelabel"> {{profile_form.as_p}}</div> 
   
     <input type="submit" name="submit"  id='submit_sign' class='submit' value="Register" />
 
